@@ -1,8 +1,9 @@
 /* eslint-disable prettier/prettier */
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
-import { Schedule, UserRol } from '.';
-import { Address } from './address.entity';
+import { Address } from 'src/modules/address/entities';
+import { Schedule } from 'src/modules/schedule/entities';
+import { UserRol } from '.';
 
 @Entity({ name: 'tb_user' })
 export class User {

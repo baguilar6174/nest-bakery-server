@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
-import { User } from './user.entity';
+import { User } from 'src/modules/user/entities';
 
 @Entity({ name: 'tb_address' })
 export class Address {

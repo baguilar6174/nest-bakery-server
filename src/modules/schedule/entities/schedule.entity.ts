@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
-import { User } from './user.entity';
+import { User } from 'src/modules/user/entities';
 
 @Entity({ name: 'tb_schedule' })
 export class Schedule {

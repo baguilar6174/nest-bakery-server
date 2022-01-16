@@ -14,6 +14,13 @@ export class UserService {
         private readonly userRepository: Repository<User>,
     ) {}
 
+    async checkPassword(
+        password: string,
+        passwordDB: string,
+    ): Promise<boolean> {
+        return await bcrypt.compare(password, passwordDB);
+    }
+
     async hashPassword(password: string): Promise<string> {
         const salt = await bcrypt.genSalt(10);
         return await bcrypt.hash(password, salt);
@@ -27,6 +34,14 @@ export class UserService {
         const user: User = await this.userRepository.findOne(id);
         if (!user) {
             throw new NotFoundException(`Resources not found`);
+        }
+        return user;
+    }
+
+    async findByEmail(email: string): Promise<User> {
+        const user = await this.userRepository.findOne({ where: { email } });
+        if (!user) {
+            throw new NotFoundException(`User (email=${email}) not found`);
         }
         return user;
     }

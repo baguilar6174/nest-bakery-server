@@ -12,7 +12,7 @@ import {
 
 import { Address } from 'src/modules/address/address.entity';
 import { Schedule } from 'src/modules/schedule/schedule.entity';
-import { Role } from 'src/modules/role/role.entity';
+import { Role } from '.';
 
 @Entity({ name: 'tb_user' })
 export class User {

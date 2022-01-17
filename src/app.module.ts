@@ -7,7 +7,9 @@ import { AddressModule } from './modules/address/address.module';
 import { ScheduleModule } from './modules/schedule/schedule.module';
 import { SettingsModule } from './modules/settings/settings.module';
 import { AuthModule } from './modules/auth/auth.module';
-import { RoleModule } from './modules/role/role.module';
+import { BoxProductsModule } from './modules/box-products/box-products.module';
+import { BoxProductsImageModule } from './modules/box-products-image/box-products-image.module';
+import { CategoryModule } from './modules/category/category.module';
 
 @Module({
     imports: [
@@ -18,7 +20,9 @@ import { RoleModule } from './modules/role/role.module';
         ScheduleModule,
         SettingsModule,
         AuthModule,
-        RoleModule,
+        BoxProductsModule,
+        BoxProductsImageModule,
+        CategoryModule,
     ],
     controllers: [],
     providers: [],

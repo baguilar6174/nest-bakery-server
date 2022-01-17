@@ -5,8 +5,7 @@ import * as bcrypt from 'bcrypt';
 
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
-import { User } from './user.entity';
-import { Role } from '../role/role.entity';
+import { User, Role } from './entities';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()

@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
-import { User } from 'src/modules/user/entities';
+import { User } from 'src/modules/user/user.entity';
 
 @Entity({ name: 'tb_address' })
 export class Address {
@@ -22,9 +22,9 @@ export class Address {
     @JoinColumn({ name: 'id_user' })
     user: User;
 
-    @CreateDateColumn({ name: 'created_at' })
-    createdAt: Date;
+    // @CreateDateColumn({ name: 'created_at' })
+    // createdAt: Date;
 
-    @UpdateDateColumn({ name: 'updated_at' })
-    updatedAt: Date;    
+    // @UpdateDateColumn({ name: 'updated_at' })
+    // updatedAt: Date;
 }

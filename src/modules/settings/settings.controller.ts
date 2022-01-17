@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 
 import { SettingsDto } from './dtos/settings.dto';
-import { Settings } from './entities';
+import { Settings } from './settings.entity';
 import { SettingsService } from './settings.service';
 
 @Controller('settings')

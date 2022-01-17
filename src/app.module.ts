@@ -7,6 +7,7 @@ import { AddressModule } from './modules/address/address.module';
 import { ScheduleModule } from './modules/schedule/schedule.module';
 import { SettingsModule } from './modules/settings/settings.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { RoleModule } from './modules/role/role.module';
 
 @Module({
     imports: [
@@ -17,6 +18,7 @@ import { AuthModule } from './modules/auth/auth.module';
         ScheduleModule,
         SettingsModule,
         AuthModule,
+        RoleModule,
     ],
     controllers: [],
     providers: [],

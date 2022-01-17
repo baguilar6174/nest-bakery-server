@@ -1,9 +1,18 @@
 /* eslint-disable prettier/prettier */
-import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    JoinTable,
+    ManyToMany,
+    OneToMany,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+} from 'typeorm';
 
-import { Address } from 'src/modules/address/entities';
-import { Schedule } from 'src/modules/schedule/entities';
-import { UserRol } from '.';
+import { Address } from 'src/modules/address/address.entity';
+import { Schedule } from 'src/modules/schedule/schedule.entity';
+import { Role } from 'src/modules/role/role.entity';
 
 @Entity({ name: 'tb_user' })
 export class User {
@@ -33,12 +42,23 @@ export class User {
     schedules: Schedule[];
 
     // Un usuario puede tener uno o varios roles
-    @OneToMany((type) => UserRol, (userRol) => userRol.rol)
-    roles: UserRol[];
+    @ManyToMany((type) => Role)
+    @JoinTable({
+        name: 'tb_user_has_role',
+        joinColumn: {
+            name: 'id_user',
+            referencedColumnName: 'id'
+        },
+        inverseJoinColumn : {
+            name: 'id_role',
+            referencedColumnName: 'id'
+        },
+    })
+    roles: Role[]
 
     @CreateDateColumn({ name: 'created_at' })
     createdAt: Date;
 
     @UpdateDateColumn({ name: 'updated_at' })
-    updatedAt: Date;    
+    updatedAt: Date;
 }

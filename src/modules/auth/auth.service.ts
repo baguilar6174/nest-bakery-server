@@ -33,6 +33,6 @@ export class AuthService {
     }
 
     async signUp(userDto: CreateUserDto) {
-        return this.userService.create(userDto);
+        return this.userService.createAdmin(userDto);
     }
 }

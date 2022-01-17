@@ -6,12 +6,17 @@ import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { User } from './user.entity';
+import { Role } from '../role/role.entity';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class UserService {
     constructor(
         @InjectRepository(User)
         private readonly userRepository: Repository<User>,
+        @InjectRepository(Role)
+        private readonly roleRepository: Repository<Role>,
+        private configService: ConfigService,
     ) {}
 
     async checkPassword(
@@ -52,6 +57,21 @@ export class UserService {
             ...body,
             password: hash,
         });
+        const adminRol = Number(this.configService.get<string>('USER_ROLE'));
+        const role: Role = await this.roleRepository.findOne(adminRol);
+        user.roles = [role];
+        return this.userRepository.save(user);
+    }
+
+    async createAdmin(body: CreateUserDto): Promise<User> {
+        const hash = await this.hashPassword(body.password);
+        const user: User = this.userRepository.create({
+            ...body,
+            password: hash,
+        });
+        const adminRol = Number(this.configService.get<string>('ADMIN_ROLE'));
+        const role: Role = await this.roleRepository.findOne(adminRol);
+        user.roles = [role];
         return this.userRepository.save(user);
     }
 

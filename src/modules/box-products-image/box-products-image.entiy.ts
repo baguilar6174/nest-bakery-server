@@ -11,7 +11,7 @@ export class BoxProductsImage {
     @Column({ nullable: false, type: 'text' })
     url: string;
 
-    @ManyToOne((type) => BoxProducts, (boxProducts) => boxProducts.images, { cascade: true, eager: true })
+    @ManyToOne((type) => BoxProducts, (boxProducts) => boxProducts.images, { cascade: true })
     @JoinColumn({ name: 'id_box_products' })
     boxProduct: BoxProducts;
 

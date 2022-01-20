@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'tb_category' })
 export class Category {
@@ -13,6 +13,6 @@ export class Category {
     @Column({ nullable: false, type: 'varchar', length: 150 })
     description: string;
 
-    @Column({ nullable: false, type: 'boolean', default: false })
+    @Column({ nullable: false, type: 'boolean', default: true })
     isActive: boolean;
 }

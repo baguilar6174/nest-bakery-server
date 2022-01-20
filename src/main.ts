@@ -6,6 +6,7 @@ import { TimeOutInterceptor } from './common/interceptors/timeout.interceptor';
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
+    app.enableCors();
     app.setGlobalPrefix(AppModule.apiPrefix);
     app.useGlobalFilters(new AllExceptionFilter());
     app.useGlobalInterceptors(new TimeOutInterceptor());

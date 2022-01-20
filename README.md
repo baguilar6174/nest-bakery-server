@@ -21,6 +21,14 @@ insert into tb_rol (id, name) values (1, 'admin'), (2, 'user'), (3, 'delivery');
 
 ## Instalación y ejecución
 
+Ejecución de la base de datos en docker
+
+```bash
+sudo docker-compose up -d
+```
+
+Se puede verificar el correcto funcionamiento en la extensión de docker de vs code
+
 ```bash
 npm install
 npm run start:dev

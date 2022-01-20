@@ -28,24 +28,24 @@ export class BoxProducts {
     @Column({ nullable: false, type: 'varchar', length: 150 })
     description: string;
 
-    @Column({ name: 'is_active', nullable: false, type: 'boolean', default: false })
+    @Column({ name: 'is_active', nullable: false, type: 'boolean', default: true })
     isActive: boolean;
 
     @Column({ nullable: false, type: 'int' })
-    quantity: boolean;
+    quantity: number;
 
-    @Column({ name: 'praparation_time', nullable: false, type: 'varchar', length: 10 })
-    praparationTime: string;
+    @Column({ name: 'preparation_time', nullable: false, type: 'varchar', length: 10, default: '24h' })
+    preparationTime: string;
 
-    @Column({ name: 'delivery_time', nullable: false, type: 'date' })
+    @Column({ name: 'delivery_time', nullable: true, type: 'date' })
     deliveryTime: Date;
 
     // Una caja puede tener una o varias imagenes
-    @OneToMany((type) => BoxProductsImage, (boxProductsImage) => boxProductsImage.boxProduct)
+    @OneToMany((type) => BoxProductsImage, (boxProductsImage) => boxProductsImage.boxProduct, {eager: true})
     images: BoxProductsImage[];
 
     // Una caja puede tener una o varias categorías
-    @ManyToMany((type) => Category, {cascade: true, eager: false })
+    @ManyToMany((type) => Category, {cascade: true, eager: true })
     @JoinTable({
         name: 'tb_box_products_has_category',
         joinColumn: {

@@ -12,7 +12,7 @@ export const DatabaseProvider: DynamicModule = TypeOrmModule.forRootAsync({
         const isDevEnv = config.get('NODE_ENV') !== Environment.Production;
 
         const dbConfig = {
-            ssl: true,
+            ssl: false,
             type: config.get('DB_DRIVER'),
             host: config.get('DB_HOST'),
             port: +config.get('DB_PORT'),

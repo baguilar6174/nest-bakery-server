@@ -10,6 +10,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { BoxProductsModule } from './modules/box-products/box-products.module';
 import { BoxProductsImageModule } from './modules/box-products-image/box-products-image.module';
 import { CategoryModule } from './modules/category/category.module';
+import { TestModule } from './modules/test/test.module';
 
 @Module({
     imports: [
@@ -23,6 +24,7 @@ import { CategoryModule } from './modules/category/category.module';
         BoxProductsModule,
         BoxProductsImageModule,
         CategoryModule,
+        TestModule,
     ],
     controllers: [],
     providers: [],

@@ -13,6 +13,6 @@ export class Category {
     @Column({ nullable: false, type: 'varchar', length: 150 })
     description: string;
 
-    @Column({ nullable: false, type: 'boolean', default: true })
+    @Column({ name: 'is_active', nullable: false, type: 'boolean', default: true })
     isActive: boolean;
 }

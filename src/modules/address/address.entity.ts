@@ -15,7 +15,7 @@ export class Address {
     @Column({ nullable: false, type: 'varchar', length: 100 })
     details: string;
 
-    @Column({ nullable: false, type: 'boolean', default: false })
+    @Column({ name: 'is_active', nullable: false, type: 'boolean', default: false })
     isActive: boolean;
 
     @ManyToOne((type) => User, (user) => user.addresses, { cascade: true, eager: true })

@@ -19,6 +19,31 @@ User roles:
 insert into tb_rol (id, name) values (1, 'admin'), (2, 'user'), (3, 'delivery');
 ```
 
+Order states:
+
+| State   |      id      |
+|----------|:-------------:|
+| pending |  1 |
+| delivered |    2   |
+
+```sql
+-- create roles
+insert into tb_order_state (id, name) values (1, 'pending'), (2, 'delivered');
+```
+
+Payment methos:
+
+| Method   |      id      |
+|----------|:-------------:|
+| cash |  1 |
+| transfer |    2   |
+| card | 3 |
+
+```sql
+-- create roles
+insert into tb_payment_method (id, name) values (1, 'cash'), (2, 'transfer'), (3, 'card');
+```
+
 ## Instalación y ejecución
 
 Ejecución de la base de datos en docker
@@ -31,6 +56,19 @@ Se puede verificar el correcto funcionamiento en la extensión de docker de vs c
 
 ```bash
 npm install
+npm run start:dev
+```
+
+## Despliegue en Heroku
+
+1. Cambiar las variables de entorno
+2. Activar la configuración de ssl en database.provider.ts
+3. Ejecutar los comandos
+
+```bash
+git add .
+git commit -m "commit message"
+git push heroku main
 npm run start:dev
 ```
 

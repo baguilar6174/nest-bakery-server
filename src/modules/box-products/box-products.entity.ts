@@ -11,6 +11,7 @@ import {
 } from 'typeorm';
 import { BoxProductsImage } from '../box-products-image/box-products-image.entiy';
 import { Category } from '../category/category.entity';
+import { OrderBoxes } from '../order/entities/order-boxes.entity';
 
 @Entity({ name: 'tb_box_products' })
 export class BoxProducts {
@@ -58,6 +59,9 @@ export class BoxProducts {
         },
     })
     categories: Category[]
+
+    @OneToMany(type => OrderBoxes, orderBoxes => orderBoxes.box)
+    orderBoxes: OrderBoxes[];
 
     @CreateDateColumn({ name: 'created_at' })
     createdAt: Date;

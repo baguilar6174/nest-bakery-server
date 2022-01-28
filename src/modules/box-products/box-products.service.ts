@@ -1,9 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { plainToInstance } from 'class-transformer';
 import { Repository } from 'typeorm';
 import { Category } from '../category/category.entity';
 import { BoxProducts } from './box-products.entity';
 import { CreateBoxDto } from './dtos/create-box.dto';
+import { ReadBoxProductDto } from './dtos/read-box.dto';
 
 @Injectable()
 export class BoxProductsService {
@@ -14,8 +16,11 @@ export class BoxProductsService {
         private readonly categoryRepository: Repository<Category>,
     ) {}
 
-    async findAll(): Promise<BoxProducts[]> {
-        return await this.boxRepository.find();
+    async findAll(): Promise<ReadBoxProductDto[]> {
+        const boxes: BoxProducts[] = await this.boxRepository.find();
+        return boxes.map((b: BoxProducts) =>
+            plainToInstance(ReadBoxProductDto, b),
+        );
     }
 
     async findOne(id: number): Promise<BoxProducts> {

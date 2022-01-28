@@ -8,11 +8,16 @@ import {
     Param,
     Post,
     Put,
+    UseGuards,
 } from '@nestjs/common';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { Roles } from '../user/decorators/rol.decorator';
+import { RoleGuard } from '../user/guards/role.guard';
 
 import { BoxProducts } from './box-products.entity';
 import { BoxProductsService } from './box-products.service';
 import { CreateBoxDto } from './dtos/create-box.dto';
+import { ReadBoxProductDto } from './dtos/read-box.dto';
 
 @Controller('box-products')
 export class BoxProductsController {
@@ -20,22 +25,26 @@ export class BoxProductsController {
 
     // 'localhost:3000/box-products'
     @Get()
-    findAll(): Promise<BoxProducts[]> {
+    findAll(): Promise<ReadBoxProductDto[]> {
         return this.boxService.findAll();
     }
 
-    @Get(':id') // localhost:3000/users/1
+    @Get(':id') // localhost:3000/box-products/1
     findOne(@Param('id') id: number): Promise<BoxProducts> {
         return this.boxService.findOne(id);
     }
 
     @Post()
     @HttpCode(HttpStatus.CREATED)
+    @Roles('admin')
+    @UseGuards(JwtAuthGuard, RoleGuard)
     create(@Body() body: CreateBoxDto): Promise<BoxProducts> {
         return this.boxService.create(body);
     }
 
     @Put(':id')
+    @Roles('admin')
+    @UseGuards(JwtAuthGuard, RoleGuard)
     update(
         @Param('id') id: number,
         @Body() body: CreateBoxDto,
@@ -44,6 +53,8 @@ export class BoxProductsController {
     }
 
     @Delete(':id')
+    @Roles('admin')
+    @UseGuards(JwtAuthGuard, RoleGuard)
     delete(@Param('id') id: number): Promise<void> {
         return this.boxService.delete(id);
     }

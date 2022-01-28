@@ -42,7 +42,7 @@ export class User {
     schedules: Schedule[];
 
     // Un usuario puede tener uno o varios roles
-    @ManyToMany((type) => Role, {cascade: true, eager: false })
+    @ManyToMany((type) => Role, {cascade: true, eager: true })
     @JoinTable({
         name: 'tb_user_has_role',
         joinColumn: {

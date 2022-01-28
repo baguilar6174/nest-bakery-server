@@ -10,20 +10,22 @@ import {
     Put,
     UseGuards,
 } from '@nestjs/common';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { Roles } from './decorators/rol.decorator';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { User } from './entities';
+import { RoleGuard } from './guards/role.guard';
 import { UserService } from './user.service';
 
-@UseGuards(JwtAuthGuard)
 @Controller('users')
 export class UserController {
     constructor(private readonly usersService: UserService) {}
 
-    // 'localhost:3000/users'
     @Get()
+    @Roles('admin')
+    @UseGuards(JwtAuthGuard, RoleGuard)
     findAll(): Promise<User[]> {
         return this.usersService.findAll();
     }

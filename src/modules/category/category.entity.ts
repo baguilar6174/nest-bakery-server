@@ -7,7 +7,7 @@ export class Category {
     @PrimaryGeneratedColumn('increment')
     id: number;
 
-    @Column({ nullable: false, type: 'varchar', length: 60 })
+    @Column({ nullable: false, unique: true, type: 'varchar', length: 60 })
     name: string;
 
     @Column({ nullable: false, type: 'varchar', length: 150 })

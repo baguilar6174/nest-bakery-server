@@ -28,6 +28,7 @@ export class BoxProducts {
 
     @Column({ nullable: false, type: 'varchar', length: 150 })
     description: string;
+    // TODO: dejar el campo como text
 
     @Column({ name: 'is_active', nullable: false, type: 'boolean', default: true })
     isActive: boolean;

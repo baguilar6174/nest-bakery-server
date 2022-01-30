@@ -55,17 +55,6 @@ export class UserService {
     }
 
     async create(body: CreateUserDto): Promise<User> {
-        // Validate email availability
-        const count = await this.userRepository.findOne({
-            where: { email: body.email },
-        });
-
-        if (count) {
-            throw new BadRequestException(
-                `user (email=${body.email}) already exist`,
-            );
-        }
-
         const hash = await this.hashPassword(body.password);
         const user: User = this.userRepository.create({
             ...body,
@@ -74,20 +63,18 @@ export class UserService {
         const adminRol = Number(this.configService.get<string>('USER_ROLE'));
         const role: Role = await this.roleRepository.findOne(adminRol);
         user.roles = [role];
-        return this.userRepository.save(user);
+        // return this.userRepository.save(user);
+        return this.userRepository.save(user).catch((e) => {
+            if (/(email)[\s\S]+(already exists)/.test(e.detail)) {
+                throw new BadRequestException(
+                    `Account with email '${body.email}' already exists.`,
+                );
+            }
+            return e;
+        });
     }
 
     async createAdmin(body: CreateUserDto): Promise<User> {
-        // Validate email availability
-        const count = await this.userRepository.findOne({
-            where: { email: body.email },
-        });
-
-        if (count) {
-            throw new BadRequestException(
-                `user (email=${body.email}) already exist`,
-            );
-        }
         const hash = await this.hashPassword(body.password);
         const user: User = this.userRepository.create({
             ...body,
@@ -96,7 +83,14 @@ export class UserService {
         const adminRol = Number(this.configService.get<string>('ADMIN_ROLE'));
         const role: Role = await this.roleRepository.findOne(adminRol);
         user.roles = [role];
-        return this.userRepository.save(user);
+        return this.userRepository.save(user).catch((e) => {
+            if (/(email)[\s\S]+(already exists)/.test(e.detail)) {
+                throw new BadRequestException(
+                    `Account with email '${body.email}' already exists.`,
+                );
+            }
+            return e;
+        });
     }
 
     async update(

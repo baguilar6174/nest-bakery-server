@@ -8,16 +8,15 @@ import {
     Param,
     Post,
     Put,
+    Query,
     UseGuards,
 } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Roles } from '../user/decorators/rol.decorator';
 import { RoleGuard } from '../user/guards/role.guard';
-
-import { BoxProducts } from './box-products.entity';
 import { BoxProductsService } from './box-products.service';
-import { CreateBoxDto } from './dtos/create-box.dto';
-import { ReadBoxProductDto } from './dtos/read-box.dto';
+import { CreateBoxDto, PaginationQueryDto, ReadBoxProductDto } from './dtos';
+import { BoxProducts } from './entities';
 
 @Controller('box-products')
 export class BoxProductsController {
@@ -25,12 +24,12 @@ export class BoxProductsController {
 
     // 'localhost:3000/box-products'
     @Get()
-    findAll(): Promise<ReadBoxProductDto[]> {
-        return this.boxService.findAll();
+    findAll(@Query() pagination: PaginationQueryDto): Promise<any> {
+        return this.boxService.findAll(pagination);
     }
 
     @Get(':id') // localhost:3000/box-products/1
-    findOne(@Param('id') id: number): Promise<BoxProducts> {
+    findOne(@Param('id') id: number): Promise<ReadBoxProductDto> {
         return this.boxService.findOne(id);
     }
 
@@ -45,17 +44,14 @@ export class BoxProductsController {
     @Put(':id')
     @Roles('admin')
     @UseGuards(JwtAuthGuard, RoleGuard)
-    update(
-        @Param('id') id: number,
-        @Body() body: CreateBoxDto,
-    ): Promise<BoxProducts> {
+    update(@Param('id') id: number, @Body() body: CreateBoxDto): Promise<any> {
         return this.boxService.update(id, body);
     }
 
     @Delete(':id')
     @Roles('admin')
     @UseGuards(JwtAuthGuard, RoleGuard)
-    delete(@Param('id') id: number): Promise<void> {
+    delete(@Param('id') id: number): Promise<any> {
         return this.boxService.delete(id);
     }
 }

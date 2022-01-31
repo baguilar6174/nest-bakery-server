@@ -1,4 +1,6 @@
 /* eslint-disable prettier/prettier */
+import { Category } from 'src/modules/category/category.entity';
+import { OrderBoxes } from 'src/modules/order/entities/order-boxes.entity';
 import {
     Column,
     CreateDateColumn,
@@ -9,9 +11,7 @@ import {
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm';
-import { BoxProductsImage } from '../box-products-image/box-products-image.entiy';
-import { Category } from '../category/category.entity';
-import { OrderBoxes } from '../order/entities/order-boxes.entity';
+import { BoxProductsImage } from '.';
 
 @Entity({ name: 'tb_box_products' })
 export class BoxProducts {
@@ -28,7 +28,6 @@ export class BoxProducts {
 
     @Column({ nullable: false, type: 'varchar', length: 150 })
     description: string;
-    // TODO: dejar el campo como text
 
     @Column({ name: 'is_active', nullable: false, type: 'boolean', default: true })
     isActive: boolean;
@@ -43,7 +42,8 @@ export class BoxProducts {
     deliveryTime: Date;
 
     // Una caja puede tener una o varias imagenes
-    @OneToMany((type) => BoxProductsImage, (boxProductsImage) => boxProductsImage.boxProduct, {eager: true})
+    @OneToMany((type) => BoxProductsImage, (boxProductsImage) => boxProductsImage.boxProduct,
+        {eager: true, cascade: ['insert', 'update'] })
     images: BoxProductsImage[];
 
     // Una caja puede tener una o varias categorías

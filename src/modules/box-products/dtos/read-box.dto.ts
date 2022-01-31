@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
 import { Exclude, Expose } from "class-transformer";
-import { BoxProductsImage } from "src/modules/box-products-image/box-products-image.entiy";
+
 import { Category } from "src/modules/category/category.entity";
+import { BoxProductsImage } from "../entities";
 
 @Exclude()
 export class ReadBoxProductDto {

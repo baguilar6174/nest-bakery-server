@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { BoxProducts } from '../box-products/box-products.entity';
+import { BoxProducts } from '../box-products/entities';
 
 import { User } from '../user/entities';
 import { Discount, Iva, Order, OrderState, PaymentMethod } from './entities';

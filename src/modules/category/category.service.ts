@@ -4,7 +4,6 @@ import {
     NotFoundException,
 } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { plainToInstance } from 'class-transformer';
 import { Repository } from 'typeorm';
 import { Category } from './category.entity';
 import { CreateCategoryDto } from './dtos/create-category.dto';
@@ -28,7 +27,7 @@ export class CategoryService {
     async findOne(id: number): Promise<Category> {
         const category: Category = await this.categoryRepository.findOne(id);
         if (!category) {
-            throw new NotFoundException(`Category not found`);
+            throw new NotFoundException(`Category with id '${id}' not found`);
         }
         return category;
     }
@@ -52,29 +51,30 @@ export class CategoryService {
         id: number,
         { name, description }: Partial<CreateCategoryDto>,
     ): Promise<any> {
-        const category: Category = await this.categoryRepository.save({
+        let category: Category = await this.categoryRepository.findOne(id);
+        if (!category) {
+            throw new NotFoundException(`Category with id '${id}' not found`);
+        }
+        category = await this.categoryRepository.save({
             id,
             name,
             description,
         });
-        if (!category) {
-            throw new NotFoundException(`Category with id ${id} not found`);
-        }
         return {
             updated: true,
-            message: `The category with id ${id} has been modified`,
+            message: `The category with id '${id}' has been modified`,
         };
     }
 
     async delete(id: number): Promise<any> {
         const category: Category = await this.categoryRepository.findOne(id);
         if (!category) {
-            throw new NotFoundException(`Category with id ${id} not found`);
+            throw new NotFoundException(`Category with id '${id}' not found`);
         }
         await this.categoryRepository.remove(category);
         return {
             deleted: true,
-            message: `The ${category.name} category has been deleted`,
+            message: `The '${category.name}' category has been deleted`,
         };
     }
 }

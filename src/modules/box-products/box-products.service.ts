@@ -2,76 +2,66 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { plainToInstance } from 'class-transformer';
 import { Repository } from 'typeorm';
-import { Category } from '../category/category.entity';
-import { BoxProducts } from './box-products.entity';
+import { PaginationQueryDto } from './dtos';
 import { CreateBoxDto } from './dtos/create-box.dto';
 import { ReadBoxProductDto } from './dtos/read-box.dto';
+import { BoxProducts } from './entities';
 
 @Injectable()
 export class BoxProductsService {
     constructor(
         @InjectRepository(BoxProducts)
         private readonly boxRepository: Repository<BoxProducts>,
-        @InjectRepository(Category)
-        private readonly categoryRepository: Repository<Category>,
     ) {}
 
-    async findAll(): Promise<ReadBoxProductDto[]> {
-        const boxes: BoxProducts[] = await this.boxRepository.find();
-        return boxes.map((b: BoxProducts) =>
-            plainToInstance(ReadBoxProductDto, b),
+    async findAll({ limit, offset }: PaginationQueryDto): Promise<any> {
+        const [result, total] = await this.boxRepository.findAndCount({
+            skip: offset,
+            take: limit,
+            where: { isActive: true },
+            order: { createdAt: 'DESC' },
+        });
+        const data = result.map(
+            (b: BoxProducts): ReadBoxProductDto =>
+                plainToInstance(ReadBoxProductDto, b),
         );
+        return { total, data };
     }
 
-    async findOne(id: number): Promise<BoxProducts> {
+    async findOne(id: number): Promise<ReadBoxProductDto> {
         const box: BoxProducts = await this.boxRepository.findOne(id);
         if (!box) {
             throw new NotFoundException(`Box products not found`);
         }
-        return box;
+        return plainToInstance(ReadBoxProductDto, box);
     }
 
-    async create({
-        name,
-        description,
-        price,
-        quantity,
-    }: CreateBoxDto): Promise<BoxProducts> {
-        const box: BoxProducts = this.boxRepository.create({
-            name,
-            description,
-            price,
-            quantity,
-        });
-        const category: Category = await this.categoryRepository.findOne({
-            where: { name: 'General' },
-        });
-        box.categories = [category];
+    async create(body: CreateBoxDto): Promise<BoxProducts> {
+        const box: BoxProducts = this.boxRepository.create(body);
         return this.boxRepository.save(box);
     }
 
-    async update(
-        id: number,
-        { name, description, price, quantity }: CreateBoxDto,
-    ): Promise<BoxProducts> {
-        const box: BoxProducts = await this.boxRepository.save({
-            id,
-            name,
-            description,
-            price,
-            quantity,
-        });
+    async update(id: number, body: CreateBoxDto): Promise<any> {
+        let box: BoxProducts = await this.boxRepository.findOne(id);
         if (!box) {
-            throw new NotFoundException(`Resource not found`);
+            throw new NotFoundException(`Box with id '${id}' not found`);
         }
-        return box;
+        box = await this.boxRepository.save({ ...body, id });
+        return {
+            updated: true,
+            message: `The '${box.name}' box has been modified`,
+        };
     }
 
-    async delete(id: number): Promise<void> {
+    async delete(id: number): Promise<any> {
         const box: BoxProducts = await this.boxRepository.findOne(id);
         if (!box) {
-            throw new NotFoundException(`Resources not found`);
+            throw new NotFoundException(`Box with id '${id}' not found`);
         }
-        this.boxRepository.remove(box);
+        await this.boxRepository.remove(box);
+        return {
+            deleted: true,
+            message: `The '${box.name}' box has been deleted`,
+        };
     }
 }

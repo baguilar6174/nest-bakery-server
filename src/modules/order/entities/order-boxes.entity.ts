@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { BoxProducts } from 'src/modules/box-products/box-products.entity';
+import { BoxProducts } from 'src/modules/box-products/entities';
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { Order } from '.';
 

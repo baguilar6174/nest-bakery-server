@@ -8,7 +8,6 @@ import { ScheduleModule } from './modules/schedule/schedule.module';
 import { SettingsModule } from './modules/settings/settings.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { BoxProductsModule } from './modules/box-products/box-products.module';
-import { BoxProductsImageModule } from './modules/box-products-image/box-products-image.module';
 import { CategoryModule } from './modules/category/category.module';
 import { TestModule } from './modules/test/test.module';
 import { OrderModule } from './modules/order/order.module';
@@ -23,7 +22,6 @@ import { OrderModule } from './modules/order/order.module';
         SettingsModule,
         AuthModule,
         BoxProductsModule,
-        BoxProductsImageModule,
         CategoryModule,
         TestModule,
         OrderModule,

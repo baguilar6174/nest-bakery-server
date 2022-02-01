@@ -20,13 +20,13 @@ export class BoxProducts {
     id: number;
 
     // nullable: false indica que el campo es requerido a nivel de BD
-    @Column({ nullable: false, type: 'varchar', length: 50 })
+    @Column({ nullable: false, type: 'varchar', length: 100 })
     name: string;
 
     @Column({ nullable: false, type: 'double precision' })
     price: number;
 
-    @Column({ nullable: false, type: 'varchar', length: 150 })
+    @Column({ nullable: false, type: 'varchar', length: 500 })
     description: string;
 
     @Column({ name: 'is_active', nullable: false, type: 'boolean', default: true })

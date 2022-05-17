@@ -34,7 +34,7 @@ export class User {
     password: string;
 
     // Un usuario puede tener cero o muchas direcciones
-    @OneToMany((type) => Address, (address) => address.user)
+    @OneToMany((type) => Address, (address) => address.user, { cascade: true, eager: true })
     addresses: Address[];
 
     // Un usuario puede tener cero o muchos horarios

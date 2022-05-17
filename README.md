@@ -44,6 +44,33 @@ Payment methos:
 insert into tb_payment_method (id, name) values (1, 'cash'), (2, 'transfer'), (3, 'card');
 ```
 
+Debe registrar un administrador
+
+# Credentials
+
+__test environment__
+
+```
+user
+    b@gmail.com
+    123456
+
+admin
+    bryan@gmail.com
+    bryan123
+```
+
+__prod environment__
+
+```
+user
+
+
+admin
+    admin@test.com
+    admin123
+```
+
 ## Instalación y ejecución
 
 Ejecución de la base de datos en docker

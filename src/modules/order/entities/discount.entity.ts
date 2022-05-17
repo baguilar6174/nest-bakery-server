@@ -10,6 +10,6 @@ export class Discount {
     @Column({ nullable: false, type: 'int' })
     percentage: number;
 
-    @Column({ name: 'is_active', nullable: false, type: 'boolean', default: false })
+    @Column({ name: 'is_active', nullable: false, type: 'boolean', default: true })
     isActive: boolean;
 }

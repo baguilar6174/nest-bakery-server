@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
     Body,
     Controller,
@@ -8,12 +9,16 @@ import {
     Param,
     Post,
     Put,
+    Query,
     UseGuards,
 } from '@nestjs/common';
+import { plainToInstance } from 'class-transformer';
 
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Roles } from './decorators/rol.decorator';
 import { CreateUserDto } from './dtos/create-user.dto';
+import { PaginationQueryDto } from './dtos/pagination-query.dto';
+import { ReadUserDto } from './dtos/read-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { User } from './entities';
 import { RoleGuard } from './guards/role.guard';
@@ -26,19 +31,20 @@ export class UserController {
     @Get()
     @Roles('admin')
     @UseGuards(JwtAuthGuard, RoleGuard)
-    findAll(): Promise<User[]> {
-        return this.usersService.findAll();
+    findAll(@Query() pagination: PaginationQueryDto): Promise<any> {
+        return this.usersService.findAll(pagination);
     }
 
-    @Get(':id') // localhost:3000/users/1
-    findOne(@Param('id') id: number): Promise<User> {
+    @Get(':id')
+    findOne(@Param('id') id: number): Promise<ReadUserDto> {
         return this.usersService.findOne(id);
     }
 
     @Post()
     @HttpCode(HttpStatus.CREATED)
-    create(@Body() body: CreateUserDto): Promise<User> {
-        return this.usersService.create(body);
+    async create(@Body() body: CreateUserDto): Promise<ReadUserDto> {
+        const user = await this.usersService.create(body);
+        return plainToInstance(ReadUserDto, user);
     }
 
     @Put(':id')
@@ -50,7 +56,7 @@ export class UserController {
     }
 
     @Delete(':id')
-    delete(@Param('id') id: number): Promise<void> {
+    delete(@Param('id') id: number): Promise<any> {
         return this.usersService.delete(id);
     }
 }

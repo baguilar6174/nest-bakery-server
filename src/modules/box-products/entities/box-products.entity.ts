@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
 import { Category } from 'src/modules/category/category.entity';
-import { OrderBoxes } from 'src/modules/order/entities/order-boxes.entity';
 import {
     Column,
     CreateDateColumn,
@@ -60,9 +59,6 @@ export class BoxProducts {
         },
     })
     categories: Category[]
-
-    @OneToMany(type => OrderBoxes, orderBoxes => orderBoxes.box)
-    orderBoxes: OrderBoxes[];
 
     @CreateDateColumn({ name: 'created_at' })
     createdAt: Date;

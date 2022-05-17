@@ -1,10 +1,13 @@
 import {
+    ArrayNotEmpty,
     IsEmail,
     IsNotEmpty,
+    IsOptional,
     IsString,
     MaxLength,
     MinLength,
 } from 'class-validator';
+import { Address } from 'src/modules/address/address.entity';
 
 export class CreateUserDto {
     @IsNotEmpty()
@@ -26,4 +29,8 @@ export class CreateUserDto {
     @IsString()
     @MinLength(6)
     readonly password: string;
+
+    @IsOptional()
+    @ArrayNotEmpty({ message: `At least one address` })
+    readonly addresses: Address[];
 }

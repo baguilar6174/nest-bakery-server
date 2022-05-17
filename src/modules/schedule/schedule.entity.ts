@@ -18,7 +18,7 @@ export class Schedule {
     @Column({ name: 'end_time', nullable: false, type: 'time' })
     endTime: string;
 
-    @ManyToOne((type) => User, (user) => user.schedules, { cascade: true, eager: false })
+    @ManyToOne((type) => User, (user) => user.schedules, { cascade: true })
     @JoinColumn({ name: 'id_user' })
     user: User;
 }

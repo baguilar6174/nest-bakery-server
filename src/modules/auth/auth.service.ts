@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { plainToInstance } from 'class-transformer';
 import { CreateUserDto } from '../user/dtos/create-user.dto';
+import { ReadUserDto } from '../user/dtos/read-user.dto';
 import { Role, User } from '../user/entities';
 
 import { UserService } from '../user/user.service';
@@ -30,7 +32,10 @@ export class AuthService {
             phone: user.phone,
             roles: user.roles.map((r: Role): string => r.name),
         };
-        return { user: payload, access_token: this.jwtService.sign(payload) };
+        return {
+            user: plainToInstance(ReadUserDto, user),
+            access_token: this.jwtService.sign(payload),
+        };
     }
 
     async signUp(userDto: CreateUserDto): Promise<any> {
@@ -43,7 +48,7 @@ export class AuthService {
             roles: user.roles.map((r: Role): string => r.name),
         };
         return {
-            user: payload,
+            user: plainToInstance(ReadUserDto, user),
             access_token: this.jwtService.sign(payload),
         };
     }
@@ -58,7 +63,7 @@ export class AuthService {
             roles: user.roles.map((r: Role): string => r.name),
         };
         return {
-            user: payload,
+            user: plainToInstance(ReadUserDto, user),
             access_token: this.jwtService.sign(payload),
         };
     }

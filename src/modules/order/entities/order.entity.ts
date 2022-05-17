@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
+import { BoxProducts } from 'src/modules/box-products/entities';
 import { User } from 'src/modules/user/entities';
-import { Column, CreateDateColumn, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { Discount, Iva, OrderState, PaymentMethod } from '.';
-import { OrderBoxes } from './order-boxes.entity';
 
 @Entity({ name: 'tb_order' })
 export class Order {
@@ -16,31 +16,46 @@ export class Order {
     @Column({ nullable: false, type: 'double precision' })
     total: number;
 
+    @Column({ nullable: false, type: 'int' })
+    quantity: number;
+
     @Column({ name: 'delivery_date', nullable: true, type: 'date' })
     deliveryDate: Date;
 
-    @OneToOne((type) => User)
+    @ManyToOne((type) => User, { eager: true })
     @JoinColumn({ name: 'id_user' })
     user: User;
 
-    @OneToOne((type) => OrderState)
+    @ManyToOne((type) => OrderState, { nullable: false, eager: true })
     @JoinColumn({ name: 'id_state' })
     state: OrderState;
 
-    @OneToOne((type) => PaymentMethod)
+    @ManyToOne((type) => PaymentMethod, { nullable: false, eager: true })
     @JoinColumn({ name: 'id_payment_method' })
     paymentMethod: PaymentMethod;
 
-    @OneToOne((type) => Iva)
+    @ManyToOne((type) => Iva, { nullable: false })
     @JoinColumn({ name: 'id_iva' })
     iva: Iva;
 
-    @OneToOne((type) => Discount)
+    @ManyToOne((type) => Discount, { nullable: false })
     @JoinColumn({ name: 'id_discount' })
     discount: Discount;
-
-    @OneToMany(type => OrderBoxes, orderBoxes => orderBoxes.order)
-    orderBoxes: OrderBoxes[];
+    
+    // Una caja puede tener una o varias categorías
+    @ManyToMany((type) => BoxProducts, {cascade: true, eager: true })
+    @JoinTable({
+        name: 'tb_order_has_box_products',
+        joinColumn: {
+            name: 'id_order',
+            referencedColumnName: 'id'
+        },
+        inverseJoinColumn : {
+            name: 'id_box_products',
+            referencedColumnName: 'id'
+        },
+    })
+    boxes: BoxProducts[]
 
     @CreateDateColumn({ name: 'created_at' })
     createdAt: Date;

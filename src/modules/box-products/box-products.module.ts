@@ -6,10 +6,10 @@ import { BoxProductsService } from './box-products.service';
 import { BoxProducts, BoxProductsImage } from './entities';
 
 @Module({
-    imports: [
-        TypeOrmModule.forFeature([BoxProducts, Category, BoxProductsImage]),
-    ],
-    controllers: [BoxProductsController],
-    providers: [BoxProductsService],
+  imports: [
+    TypeOrmModule.forFeature([BoxProducts, Category, BoxProductsImage]),
+  ],
+  controllers: [BoxProductsController],
+  providers: [BoxProductsService],
 })
 export class BoxProductsModule {}

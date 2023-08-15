@@ -1,14 +1,14 @@
 import {
-    Body,
-    Controller,
-    Delete,
-    Get,
-    HttpCode,
-    HttpStatus,
-    Param,
-    Post,
-    Put,
-    UseGuards,
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  Post,
+  Put,
+  UseGuards,
 } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Roles } from '../user/decorators/rol.decorator';
@@ -19,37 +19,37 @@ import { CreateAddressDto } from './dtos/create-address.dto';
 
 @Controller('addresses')
 export class AddressController {
-    constructor(private readonly addressService: AddressService) {}
+  constructor(private readonly addressService: AddressService) {}
 
-    @Get(':id')
-    @Roles('admin', 'user')
-    @UseGuards(JwtAuthGuard, RoleGuard)
-    findbyUser(@Param('id') id: number): Promise<Address[]> {
-        return this.addressService.findbyUser(id);
-    }
+  @Get(':id')
+  @Roles('admin', 'user')
+  @UseGuards(JwtAuthGuard, RoleGuard)
+  findbyUser(@Param('id') id: number): Promise<Address[]> {
+    return this.addressService.findbyUser(id);
+  }
 
-    @Post()
-    @HttpCode(HttpStatus.CREATED)
-    @Roles('admin', 'user')
-    @UseGuards(JwtAuthGuard, RoleGuard)
-    create(@Body() body: CreateAddressDto): Promise<Address> {
-        return this.addressService.create(body);
-    }
+  @Post()
+  @HttpCode(HttpStatus.CREATED)
+  @Roles('admin', 'user')
+  @UseGuards(JwtAuthGuard, RoleGuard)
+  create(@Body() body: CreateAddressDto): Promise<Address> {
+    return this.addressService.create(body);
+  }
 
-    @Put(':id')
-    @Roles('admin', 'user')
-    @UseGuards(JwtAuthGuard, RoleGuard)
-    update(
-        @Param('id') userId: number,
-        @Body() body: CreateAddressDto,
-    ): Promise<any> {
-        return this.addressService.update(userId, body);
-    }
+  @Put(':id')
+  @Roles('admin', 'user')
+  @UseGuards(JwtAuthGuard, RoleGuard)
+  update(
+    @Param('id') userId: number,
+    @Body() body: CreateAddressDto,
+  ): Promise<any> {
+    return this.addressService.update(userId, body);
+  }
 
-    @Delete(':id')
-    @Roles('admin', 'user')
-    @UseGuards(JwtAuthGuard, RoleGuard)
-    delete(@Param('id') id: number): Promise<any> {
-        return this.addressService.delete(id);
-    }
+  @Delete(':id')
+  @Roles('admin', 'user')
+  @UseGuards(JwtAuthGuard, RoleGuard)
+  delete(@Param('id') id: number): Promise<any> {
+    return this.addressService.delete(id);
+  }
 }

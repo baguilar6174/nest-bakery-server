@@ -5,21 +5,21 @@ import { LocalAuthGuard } from './guards/local-auth.guard';
 
 @Controller('auth')
 export class AuthController {
-    constructor(private readonly authService: AuthService) {}
+  constructor(private readonly authService: AuthService) {}
 
-    @UseGuards(LocalAuthGuard)
-    @Post('signin')
-    async signIn(@Request() req) {
-        return await this.authService.signIn(req.user);
-    }
+  @UseGuards(LocalAuthGuard)
+  @Post('signin')
+  async signIn(@Request() req) {
+    return await this.authService.signIn(req.user);
+  }
 
-    @Post('admin/signup')
-    async adminSignUp(@Body() body: CreateUserDto) {
-        return await this.authService.adminSignUp(body);
-    }
+  @Post('admin/signup')
+  async adminSignUp(@Body() body: CreateUserDto) {
+    return await this.authService.adminSignUp(body);
+  }
 
-    @Post('signup')
-    async signUp(@Body() body: CreateUserDto) {
-        return await this.authService.signUp(body);
-    }
+  @Post('signup')
+  async signUp(@Body() body: CreateUserDto) {
+    return await this.authService.signUp(body);
+  }
 }

@@ -6,11 +6,11 @@ Crear los roles con los que el sistema va a trabajar:
 
 User roles:
 
-| Rol   |      id      |
-|----------|:-------------:|
-| admin |  1 |
-| user |    2   |
-| delivery | 3 |
+| Rol      | id  |
+| -------- | :-: |
+| admin    |  1  |
+| user     |  2  |
+| delivery |  3  |
 
 ```sql
 -- create roles
@@ -19,10 +19,10 @@ insert into tb_rol (id, name) values (1, 'admin'), (2, 'user'), (3, 'delivery');
 
 Order states:
 
-| State   |      id      |
-|----------|:-------------:|
-| pending |  1 |
-| delivered |    2   |
+| State     | id  |
+| --------- | :-: |
+| pending   |  1  |
+| delivered |  2  |
 
 ```sql
 -- create roles
@@ -31,11 +31,11 @@ insert into tb_order_state (id, name) values (1, 'pending'), (2, 'delivered');
 
 Payment methos:
 
-| Method   |      id      |
-|----------|:-------------:|
-| cash |  1 |
-| transfer |    2   |
-| card | 3 |
+| Method   | id  |
+| -------- | :-: |
+| cash     |  1  |
+| transfer |  2  |
+| card     |  3  |
 
 ```sql
 -- create roles
@@ -46,7 +46,7 @@ Debe registrar un administrador
 
 # Credentials
 
-__test environment__
+**test environment**
 
 ```
 user
@@ -58,7 +58,7 @@ admin
     bryan123
 ```
 
-__prod environment__
+**prod environment**
 
 ```
 user
@@ -96,6 +96,11 @@ git commit -m "commit message"
 git push heroku main
 npm run start:dev
 ```
+
+## TODO
+
+- Review desable eslint comments
+- Verify deprecated packages
 
 ## Autor
 

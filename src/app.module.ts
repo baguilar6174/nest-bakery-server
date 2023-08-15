@@ -13,27 +13,27 @@ import { TestModule } from './modules/test/test.module';
 import { OrderModule } from './modules/order/order.module';
 
 @Module({
-    imports: [
-        ConfigModule.forRoot({ isGlobal: true }),
-        DatabaseModule,
-        UserModule,
-        AddressModule,
-        ScheduleModule,
-        SettingsModule,
-        AuthModule,
-        BoxProductsModule,
-        CategoryModule,
-        TestModule,
-        OrderModule,
-    ],
-    controllers: [],
-    providers: [],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    DatabaseModule,
+    UserModule,
+    AddressModule,
+    ScheduleModule,
+    SettingsModule,
+    AuthModule,
+    BoxProductsModule,
+    CategoryModule,
+    TestModule,
+    OrderModule,
+  ],
+  controllers: [],
+  providers: [],
 })
 export class AppModule {
-    static port: number;
-    static apiPrefix: string;
-    constructor(private readonly configService: ConfigService) {
-        AppModule.port = +this.configService.get('PORT');
-        AppModule.apiPrefix = this.configService.get('API_PREFIX');
-    }
+  static port: number;
+  static apiPrefix: string;
+  constructor(private readonly configService: ConfigService) {
+    AppModule.port = +this.configService.get('PORT');
+    AppModule.apiPrefix = this.configService.get('API_PREFIX');
+  }
 }

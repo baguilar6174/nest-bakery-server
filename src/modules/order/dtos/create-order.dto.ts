@@ -4,25 +4,25 @@ import { User } from 'src/modules/user/entities';
 import { PaymentMethod } from '../entities';
 
 export class CreateOrderDto {
-    @IsNotEmpty()
-    @IsNumber()
-    readonly subtotal: number;
+  @IsNotEmpty()
+  @IsNumber()
+  readonly subtotal: number;
 
-    @IsNotEmpty()
-    @IsNumber()
-    readonly total: number;
+  @IsNotEmpty()
+  @IsNumber()
+  readonly total: number;
 
-    @IsNotEmpty()
-    @IsInt()
-    readonly quantity: number;
+  @IsNotEmpty()
+  @IsInt()
+  readonly quantity: number;
 
-    @IsNotEmpty()
-    readonly user: User;
+  @IsNotEmpty()
+  readonly user: User;
 
-    @IsNotEmpty()
-    readonly paymentMethod: PaymentMethod;
+  @IsNotEmpty()
+  readonly paymentMethod: PaymentMethod;
 
-    @IsNotEmpty()
-    @ArrayNotEmpty({ message: `At least one product` })
-    readonly boxes: BoxProducts[];
+  @IsNotEmpty()
+  @ArrayNotEmpty({ message: `At least one product` })
+  readonly boxes: BoxProducts[];
 }

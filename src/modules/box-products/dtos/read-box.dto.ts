@@ -1,40 +1,37 @@
-/* eslint-disable prettier/prettier */
-import { Exclude, Expose } from "class-transformer";
+import { Exclude, Expose } from 'class-transformer';
 
-import { Category } from "src/modules/category/category.entity";
-import { BoxProductsImage } from "../entities";
+import { Category } from 'src/modules/category/category.entity';
+import { BoxProductsImage } from '../entities';
 
 @Exclude()
 export class ReadBoxProductDto {
-    
-    @Expose()
-    readonly name: string;
-    
-    @Expose()
-    readonly price: number;
-    
-    @Expose()
-    readonly description: string;
-    
-    @Expose()
-    readonly quantity: number;
+  @Expose()
+  readonly name: string;
 
-    @Expose()
-    readonly id: number;
+  @Expose()
+  readonly price: number;
 
-    @Expose()
-    readonly isActive: boolean;
+  @Expose()
+  readonly description: string;
 
-    @Expose()
-    readonly preparationTime: string;
+  @Expose()
+  readonly quantity: number;
 
-    @Expose()
-    readonly deliveryTime: Date;
+  @Expose()
+  readonly id: number;
 
-    @Expose()
-    readonly images: BoxProductsImage[];
+  @Expose()
+  readonly isActive: boolean;
 
-    @Expose()
-    readonly categories: Category[]
+  @Expose()
+  readonly preparationTime: string;
 
+  @Expose()
+  readonly deliveryTime: Date;
+
+  @Expose()
+  readonly images: BoxProductsImage[];
+
+  @Expose()
+  readonly categories: Category[];
 }

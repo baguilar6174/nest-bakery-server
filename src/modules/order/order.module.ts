@@ -8,18 +8,18 @@ import { OrderController } from './order.controller';
 import { OrderService } from './order.service';
 
 @Module({
-    imports: [
-        TypeOrmModule.forFeature([
-            OrderState,
-            Order,
-            PaymentMethod,
-            Discount,
-            Iva,
-            User,
-            BoxProducts,
-        ]),
-    ],
-    controllers: [OrderController],
-    providers: [OrderService],
+  imports: [
+    TypeOrmModule.forFeature([
+      OrderState,
+      Order,
+      PaymentMethod,
+      Discount,
+      Iva,
+      User,
+      BoxProducts,
+    ]),
+  ],
+  controllers: [OrderController],
+  providers: [OrderService],
 })
 export class OrderModule {}

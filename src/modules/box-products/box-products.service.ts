@@ -29,7 +29,9 @@ export class BoxProductsService {
   }
 
   async findOne(id: number): Promise<ReadBoxProductDto> {
-    const box: BoxProducts = await this.boxRepository.findOne(id);
+    const box: BoxProducts = await this.boxRepository.findOne({
+      where: { id },
+    });
     if (!box) {
       throw new NotFoundException(`Box products not found`);
     }
@@ -42,7 +44,7 @@ export class BoxProductsService {
   }
 
   async update(id: number, body: CreateBoxDto): Promise<any> {
-    let box: BoxProducts = await this.boxRepository.findOne(id);
+    let box: BoxProducts = await this.boxRepository.findOne({ where: { id } });
     if (!box) {
       throw new NotFoundException(`Box with id '${id}' not found`);
     }
@@ -54,7 +56,9 @@ export class BoxProductsService {
   }
 
   async delete(id: number): Promise<any> {
-    const box: BoxProducts = await this.boxRepository.findOne(id);
+    const box: BoxProducts = await this.boxRepository.findOne({
+      where: { id },
+    });
     if (!box) {
       throw new NotFoundException(`Box with id '${id}' not found`);
     }

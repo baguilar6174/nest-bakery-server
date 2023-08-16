@@ -24,8 +24,10 @@ export class AddressController {
   @Get(':id')
   @Roles('admin', 'user')
   @UseGuards(JwtAuthGuard, RoleGuard)
-  findbyUser(@Param('id') id: number): Promise<Address[]> {
-    return this.addressService.findbyUser(id);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  findbyUser(@Param('id') _id: number): Address[] {
+    // return this.addressService.findbyUser(id);
+    return [];
   }
 
   @Post()

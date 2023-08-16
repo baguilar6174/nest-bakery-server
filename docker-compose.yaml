@@ -1,0 +1,13 @@
+# version to use in docker-compose
+version: '3'
+services:
+  backerydb:
+    image: postgres:15.1
+    container_name: 'bakery-app'
+    restart: 'no'
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password

@@ -47,7 +47,7 @@ export class UserService {
   }
 
   async findOne(id: number): Promise<ReadUserDto> {
-    const user: User = await this.userRepository.findOne(id);
+    const user: User = await this.userRepository.findOne({ where: { id } });
     if (!user) {
       throw new NotFoundException(`Usuario no encontrado`);
     }
@@ -71,7 +71,9 @@ export class UserService {
       password: hash,
     });
     const adminRol = Number(this.configService.get<string>('USER_ROLE'));
-    const role: Role = await this.roleRepository.findOne(adminRol);
+    const role: Role = await this.roleRepository.findOne({
+      where: { id: adminRol },
+    });
     user.roles = [role];
     return this.userRepository.save(user).catch((e) => {
       if (/(email)[\s\S]+(already exists)/.test(e.detail)) {
@@ -90,7 +92,9 @@ export class UserService {
       password: hash,
     });
     const adminRol = Number(this.configService.get<string>('ADMIN_ROLE'));
-    const role: Role = await this.roleRepository.findOne(adminRol);
+    const role: Role = await this.roleRepository.findOne({
+      where: { id: adminRol },
+    });
     user.roles = [role];
     return this.userRepository.save(user).catch((e) => {
       if (/(email)[\s\S]+(already exists)/.test(e.detail)) {
@@ -104,7 +108,7 @@ export class UserService {
 
   async update(id: number, body: UpdateUserDto): Promise<any> {
     const hash = await this.hashPassword(body.password);
-    let user: User = await this.userRepository.findOne(id);
+    let user: User = await this.userRepository.findOne({ where: { id } });
     if (!user) {
       throw new NotFoundException(`Usuario con id '${id}' no encontrado`);
     }
@@ -116,7 +120,7 @@ export class UserService {
   }
 
   async delete(id: number): Promise<any> {
-    const user: User = await this.userRepository.findOne(id);
+    const user: User = await this.userRepository.findOne({ where: { id } });
     if (!user) {
       throw new NotFoundException(`Usuario con id '${id}' no encontrado`);
     }

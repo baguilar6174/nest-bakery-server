@@ -16,7 +16,9 @@ export class SettingsService {
   }
 
   async findOne(id: number): Promise<Settings> {
-    const settings: Settings = await this.settingsRepository.findOne(id);
+    const settings: Settings = await this.settingsRepository.findOne({
+      where: { id },
+    });
     if (!settings) {
       throw new NotFoundException(`Resources not found`);
     }
@@ -41,7 +43,9 @@ export class SettingsService {
   }
 
   async delete(id: number): Promise<void> {
-    const settings: Settings = await this.settingsRepository.findOne(id);
+    const settings: Settings = await this.settingsRepository.findOne({
+      where: { id },
+    });
     if (!settings) {
       throw new NotFoundException(`Resources not found`);
     }

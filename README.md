@@ -2,6 +2,10 @@
 
 ## Importante
 
+TODO:
+
+Create database db_bakery
+
 Crear los roles con los que el sistema va a trabajar:
 
 User roles:
@@ -74,28 +78,20 @@ admin
 Ejecución de la base de datos en docker
 
 ```bash
-sudo docker-compose up -d
+docker compose up -d
 ```
 
 Se puede verificar el correcto funcionamiento en la extensión de docker de vs code
 
 ```bash
-npm install
-npm run start:dev
+yarn
+yarn run start:dev
 ```
 
 ## Despliegue en Heroku
 
 1. Cambiar las variables de entorno
 2. Activar la configuración de ssl en database.provider.ts
-3. Ejecutar los comandos
-
-```bash
-git add .
-git commit -m "commit message"
-git push heroku main
-npm run start:dev
-```
 
 ## TODO
 

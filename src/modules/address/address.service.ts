@@ -11,13 +11,13 @@ export class AddressService {
     private readonly addressRepository: Repository<Address>,
   ) {}
 
-  async findbyUser(id: number): Promise<Address[]> {
+  /* async findbyUser(id: number): Promise<Address[]> {
     const addresses: Address[] = await this.addressRepository.find({
       where: { user: id },
       order: { createdAt: 'DESC' },
     });
     return addresses;
-  }
+  } */
 
   async create(body: CreateAddressDto): Promise<Address> {
     const address: Address = this.addressRepository.create(body);
@@ -25,7 +25,9 @@ export class AddressService {
   }
 
   async update(id: number, body: CreateAddressDto): Promise<any> {
-    let address: Address = await this.addressRepository.findOne(id);
+    let address: Address = await this.addressRepository.findOne({
+      where: { id },
+    });
     if (!address) {
       throw new NotFoundException(`User addresses's with id '${id}' not found`);
     }
@@ -37,7 +39,9 @@ export class AddressService {
   }
 
   async delete(id: number): Promise<any> {
-    const address: Address = await this.addressRepository.findOne(id);
+    const address: Address = await this.addressRepository.findOne({
+      where: { id },
+    });
     if (!address) {
       throw new NotFoundException(`Address with id '${id}' not found`);
     }

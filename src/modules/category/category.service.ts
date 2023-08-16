@@ -25,7 +25,9 @@ export class CategoryService {
   }
 
   async findOne(id: number): Promise<Category> {
-    const category: Category = await this.categoryRepository.findOne(id);
+    const category: Category = await this.categoryRepository.findOne({
+      where: { id },
+    });
     if (!category) {
       throw new NotFoundException(`Category with id '${id}' not found`);
     }
@@ -51,7 +53,9 @@ export class CategoryService {
     id: number,
     { name, description }: Partial<CreateCategoryDto>,
   ): Promise<any> {
-    let category: Category = await this.categoryRepository.findOne(id);
+    let category: Category = await this.categoryRepository.findOne({
+      where: { id },
+    });
     if (!category) {
       throw new NotFoundException(`Category with id '${id}' not found`);
     }
@@ -67,7 +71,9 @@ export class CategoryService {
   }
 
   async delete(id: number): Promise<any> {
-    const category: Category = await this.categoryRepository.findOne(id);
+    const category: Category = await this.categoryRepository.findOne({
+      where: { id },
+    });
     if (!category) {
       throw new NotFoundException(`Category with id '${id}' not found`);
     }

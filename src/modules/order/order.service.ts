@@ -27,7 +27,7 @@ export class OrderService {
   }
 
   async findOne(id: number): Promise<Order> {
-    const order: Order = await this.orderRepository.findOne(id);
+    const order: Order = await this.orderRepository.findOne({ where: { id } });
     if (!order) {
       throw new NotFoundException(`Order with id '${id}' not found`);
     }
@@ -36,11 +36,15 @@ export class OrderService {
 
   async create(body: CreateOrderDto): Promise<Order> {
     // Set pending state
-    const state: OrderState = await this.stateRepository.findOne(1);
+    const state: OrderState = await this.stateRepository.findOne({
+      where: { id: 1 },
+    });
     // Set iva 12
-    const iva: Iva = await this.ivaRepository.findOne(1);
+    const iva: Iva = await this.ivaRepository.findOne({ where: { id: 1 } });
     // Set discount 0
-    const discount: Discount = await this.discountRepository.findOne(1);
+    const discount: Discount = await this.discountRepository.findOne({
+      where: { id: 1 },
+    });
     const order: Order = this.orderRepository.create({
       ...body,
       state,
@@ -51,12 +55,14 @@ export class OrderService {
   }
 
   async update(id: number): Promise<any> {
-    let order: Order = await this.orderRepository.findOne(id);
+    let order: Order = await this.orderRepository.findOne({ where: { id } });
     if (!order) {
       throw new NotFoundException(`Order with id '${id}' not found`);
     }
     // Set delivered state
-    const state: OrderState = await this.stateRepository.findOne(2);
+    const state: OrderState = await this.stateRepository.findOne({
+      where: { id: 2 },
+    });
     order = await this.orderRepository.save({ ...order, state, id });
     return {
       updated: true,
@@ -65,7 +71,7 @@ export class OrderService {
   }
 
   async delete(id: number): Promise<any> {
-    const order: Order = await this.orderRepository.findOne(id);
+    const order: Order = await this.orderRepository.findOne({ where: { id } });
     if (!order) {
       throw new NotFoundException(`Order with id '${id}' not found`);
     }

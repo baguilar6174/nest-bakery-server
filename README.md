@@ -96,7 +96,6 @@ yarn run start:dev
 ## TODO
 
 - Review desable eslint comments
-- Verify deprecated packages
 
 ## Autor
 

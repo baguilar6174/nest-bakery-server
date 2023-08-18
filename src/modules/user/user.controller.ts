@@ -2,10 +2,10 @@ import { Controller, Get, Param, Query, UseGuards } from '@nestjs/common';
 
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Roles } from './decorators/rol.decorator';
-import { PaginationQueryDto } from './dtos/pagination-query.dto';
 import { ReadUserDto } from './dtos/read-user.dto';
 import { RoleGuard } from './guards/role.guard';
 import { UserService } from './user.service';
+import { PaginationQueryDto } from '../../common/dtos';
 
 @Controller('users')
 export class UserController {

@@ -31,7 +31,7 @@ export class AppModule {
   static port: number;
   static apiPrefix: string;
   constructor(private readonly configService: ConfigService) {
-    AppModule.port = +this.configService.get('PORT');
+    AppModule.port = Number(this.configService.get('PORT'));
     AppModule.apiPrefix = this.configService.get('API_PREFIX');
   }
 }

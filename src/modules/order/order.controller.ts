@@ -14,9 +14,10 @@ import {
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Roles } from '../user/decorators/rol.decorator';
 import { RoleGuard } from '../user/guards/role.guard';
-import { CreateOrderDto, PaginationQueryDto } from './dtos';
+import { CreateOrderDto } from './dtos';
 import { Order } from './entities';
 import { OrderService } from './order.service';
+import { PaginationQueryDto } from '../../common/dtos';
 
 @Controller('orders')
 export class OrderController {

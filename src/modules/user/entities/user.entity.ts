@@ -2,7 +2,7 @@ import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany } from 'typeorm';
 
 import { Address } from 'src/modules/address/address.entity';
 import { Role } from '../../../common/enum/roles.enum';
-import { BaseEntity } from '../../../common/entities/base.entity';
+import { BaseEntity } from '../../../common/entities';
 import { IUser } from '../interfaces/user.interface';
 
 @Entity({ name: 'tb_user' })

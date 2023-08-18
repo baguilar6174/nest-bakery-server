@@ -15,8 +15,9 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Roles } from '../user/decorators/rol.decorator';
 import { RoleGuard } from '../user/guards/role.guard';
 import { BoxProductsService } from './box-products.service';
-import { CreateBoxDto, PaginationQueryDto, ReadBoxProductDto } from './dtos';
+import { CreateBoxDto, ReadBoxProductDto } from './dtos';
 import { BoxProducts } from './entities';
+import { PaginationQueryDto } from '../../common/dtos';
 
 @Controller('box-products')
 export class BoxProductsController {

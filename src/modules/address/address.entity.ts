@@ -1,8 +1,8 @@
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
 import { User } from 'src/modules/user/entities';
-import { BaseEntity } from '../../common/entities/base.entity';
 import { IAddress } from './interfaces/address.interface';
+import { BaseEntity } from '../../common/entities';
 
 @Entity({ name: 'tb_address' })
 export class Address extends BaseEntity implements IAddress {

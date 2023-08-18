@@ -1,6 +1,6 @@
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { BoxProducts } from '.';
-import { BaseEntity } from '../../../common/entities/base.entity';
+import { BaseEntity } from '../../../common/entities';
 
 @Entity({ name: 'tb_box_products_image' })
 export class BoxProductsImage extends BaseEntity {

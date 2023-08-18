@@ -2,10 +2,10 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { plainToInstance } from 'class-transformer';
 import { Repository } from 'typeorm';
-import { PaginationQueryDto } from './dtos';
 import { CreateBoxDto } from './dtos/create-box.dto';
 import { ReadBoxProductDto } from './dtos/read-box.dto';
 import { BoxProducts } from './entities';
+import { PaginationQueryDto } from '../../common/dtos';
 
 @Injectable()
 export class BoxProductsService {

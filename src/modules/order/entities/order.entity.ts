@@ -9,7 +9,7 @@ import {
   ManyToOne,
 } from 'typeorm';
 
-import { BaseEntity } from '../../../common/entities/base.entity';
+import { BaseEntity } from '../../../common/entities';
 import { OrderState, PaymentMethod } from '../../../common/enum';
 
 @Entity({ name: 'tb_order' })

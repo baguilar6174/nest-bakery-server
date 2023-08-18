@@ -6,8 +6,8 @@ import * as bcrypt from 'bcrypt';
 
 import { CreateUserDto } from '../auth/dtos/signUp.dto';
 import { User } from './entities';
-import { PaginationQueryDto } from './dtos/pagination-query.dto';
 import { ReadUserDto } from './dtos/read-user.dto';
+import { PaginationQueryDto } from '../../common/dtos';
 
 @Injectable()
 export class UserService {

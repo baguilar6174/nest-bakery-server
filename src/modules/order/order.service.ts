@@ -17,7 +17,7 @@ export class OrderService {
     private readonly discountRepository: Repository<Discount>,
   ) {}
 
-  async findAll({ limit, offset }: PaginationQueryDto): Promise<any> {
+  async findAll({ limit, offset }: PaginationQueryDto) {
     const [result, total] = await this.orderRepository.findAndCount({
       skip: offset,
       take: limit,
@@ -54,7 +54,7 @@ export class OrderService {
     return this.orderRepository.save(order);
   }
 
-  async update(id: number): Promise<any> {
+  async update(id: number) {
     let order: Order = await this.orderRepository.findOne({ where: { id } });
     if (!order) {
       throw new NotFoundException(`Order with id '${id}' not found`);
@@ -70,7 +70,7 @@ export class OrderService {
     };
   }
 
-  async delete(id: number): Promise<any> {
+  async delete(id: number) {
     const order: Order = await this.orderRepository.findOne({ where: { id } });
     if (!order) {
       throw new NotFoundException(`Order with id '${id}' not found`);

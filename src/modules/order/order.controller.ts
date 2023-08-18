@@ -25,7 +25,7 @@ export class OrderController {
   @Get()
   @Roles('admin')
   @UseGuards(JwtAuthGuard, RoleGuard)
-  findAll(@Query() pagination: PaginationQueryDto): Promise<any> {
+  findAll(@Query() pagination: PaginationQueryDto) {
     return this.orderService.findAll(pagination);
   }
 
@@ -47,14 +47,14 @@ export class OrderController {
   @Put(':id')
   @Roles('admin')
   @UseGuards(JwtAuthGuard, RoleGuard)
-  update(@Param('id') id: number): Promise<any> {
+  update(@Param('id') id: number) {
     return this.orderService.update(id);
   }
 
   @Delete(':id')
   @Roles('admin')
   @UseGuards(JwtAuthGuard, RoleGuard)
-  delete(@Param('id') id: number): Promise<any> {
+  delete(@Param('id') id: number) {
     return this.orderService.delete(id);
   }
 }

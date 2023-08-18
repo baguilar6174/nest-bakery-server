@@ -13,11 +13,6 @@ export class AuthController {
     return await this.authService.signIn(req.user);
   }
 
-  @Post('admin/signup')
-  async adminSignUp(@Body() body: CreateUserDto) {
-    return await this.authService.adminSignUp(body);
-  }
-
   @Post('signup')
   async signUp(@Body() body: CreateUserDto) {
     return await this.authService.signUp(body);

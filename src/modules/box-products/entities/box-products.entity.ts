@@ -51,16 +51,14 @@ export class BoxProducts {
 
   // Una caja puede tener una o varias imagenes
   @OneToMany(
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    (_type) => BoxProductsImage,
+    () => BoxProductsImage,
     (boxProductsImage) => boxProductsImage.boxProduct,
     { eager: true, cascade: ['insert', 'update'] },
   )
   images: BoxProductsImage[];
 
   // Una caja puede tener una o varias categorías
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  @ManyToMany((_type) => Category, { cascade: true, eager: true })
+  @ManyToMany(() => Category, { cascade: true, eager: true })
   @JoinTable({
     name: 'tb_box_products_has_category',
     joinColumn: {

@@ -14,7 +14,7 @@ export class BoxProductsService {
     private readonly boxRepository: Repository<BoxProducts>,
   ) {}
 
-  async findAll({ limit, offset }: PaginationQueryDto): Promise<any> {
+  async findAll({ limit, offset }: PaginationQueryDto) {
     const [result, total] = await this.boxRepository.findAndCount({
       skip: offset,
       take: limit,
@@ -43,7 +43,7 @@ export class BoxProductsService {
     return this.boxRepository.save(box);
   }
 
-  async update(id: number, body: CreateBoxDto): Promise<any> {
+  async update(id: number, body: CreateBoxDto) {
     let box: BoxProducts = await this.boxRepository.findOne({ where: { id } });
     if (!box) {
       throw new NotFoundException(`Box with id '${id}' not found`);
@@ -55,7 +55,7 @@ export class BoxProductsService {
     };
   }
 
-  async delete(id: number): Promise<any> {
+  async delete(id: number) {
     const box: BoxProducts = await this.boxRepository.findOne({
       where: { id },
     });

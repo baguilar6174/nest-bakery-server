@@ -41,17 +41,14 @@ export class AddressController {
   @Put(':id')
   @Roles('admin', 'user')
   @UseGuards(JwtAuthGuard, RoleGuard)
-  update(
-    @Param('id') userId: number,
-    @Body() body: CreateAddressDto,
-  ): Promise<any> {
+  update(@Param('id') userId: number, @Body() body: CreateAddressDto) {
     return this.addressService.update(userId, body);
   }
 
   @Delete(':id')
   @Roles('admin', 'user')
   @UseGuards(JwtAuthGuard, RoleGuard)
-  delete(@Param('id') id: number): Promise<any> {
+  delete(@Param('id') id: number) {
     return this.addressService.delete(id);
   }
 }

@@ -1,6 +1,6 @@
 import { Exclude, Expose } from 'class-transformer';
 import { Address } from 'src/modules/address/address.entity';
-import { Role } from '../entities';
+import { Role } from '../../../common/enum/roles.enum';
 
 @Exclude()
 export class ReadUserDto {
@@ -20,5 +20,5 @@ export class ReadUserDto {
   readonly addresses: Address[];
 
   @Expose()
-  readonly roles: Role[];
+  readonly role: Role;
 }

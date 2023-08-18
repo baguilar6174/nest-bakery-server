@@ -29,8 +29,7 @@ export class Address {
   })
   isActive: boolean;
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  @ManyToOne((_type) => User, (user) => user.addresses, { onDelete: 'CASCADE' })
+  @ManyToOne(() => User, (user) => user.addresses, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'id_user' })
   user: User;
 

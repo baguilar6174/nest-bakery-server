@@ -1,9 +1,9 @@
 import {
+  BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   Entity,
-  JoinTable,
-  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -11,7 +11,6 @@ import {
 
 import { Address } from 'src/modules/address/address.entity';
 import { Schedule } from 'src/modules/schedule/schedule.entity';
-import { Role } from '.';
 
 @Entity({ name: 'tb_user' })
 export class User {
@@ -32,37 +31,33 @@ export class User {
   password: string;
 
   // Un usuario puede tener cero o muchas direcciones
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  @OneToMany((_type) => Address, (address) => address.user, {
+  @OneToMany(() => Address, (address) => address.user, {
     cascade: true,
     eager: true,
   })
   addresses: Address[];
 
   // Un usuario puede tener cero o muchos horarios
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  @OneToMany((_type) => Schedule, (schedule) => schedule.user)
+  @OneToMany(() => Schedule, (schedule) => schedule.user)
   schedules: Schedule[];
 
-  // Un usuario puede tener uno o varios roles
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  @ManyToMany((_type) => Role, { cascade: true, eager: true })
-  @JoinTable({
-    name: 'tb_user_has_role',
-    joinColumn: {
-      name: 'id_user',
-      referencedColumnName: 'id',
-    },
-    inverseJoinColumn: {
-      name: 'id_role',
-      referencedColumnName: 'id',
-    },
-  })
-  roles: Role[];
+  // A user can only have one role admin | user | delivery
+  @Column({ nullable: false, type: 'text' })
+  role: string;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  @BeforeInsert()
+  checkEmailBeforeInsert(): void {
+    this.email = this.email.toLowerCase().trim();
+  }
+
+  @BeforeUpdate()
+  checkEmailBeforeUpdate(): void {
+    this.checkEmailBeforeInsert();
+  }
 }

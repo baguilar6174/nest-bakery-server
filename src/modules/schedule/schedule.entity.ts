@@ -22,8 +22,7 @@ export class Schedule {
   @Column({ name: 'end_time', nullable: false, type: 'time' })
   endTime: string;
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  @ManyToOne((_type) => User, (user) => user.schedules, { cascade: true })
+  @ManyToOne(() => User, (user) => user.schedules, { cascade: true })
   @JoinColumn({ name: 'id_user' })
   user: User;
 }

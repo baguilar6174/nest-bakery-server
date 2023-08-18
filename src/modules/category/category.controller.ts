@@ -42,17 +42,14 @@ export class CategoryController {
   @Put(':id')
   @Roles('admin')
   @UseGuards(JwtAuthGuard, RoleGuard)
-  update(
-    @Param('id') id: number,
-    @Body() body: Partial<CreateCategoryDto>,
-  ): Promise<any> {
+  update(@Param('id') id: number, @Body() body: Partial<CreateCategoryDto>) {
     return this.categoryService.update(id, body);
   }
 
   @Delete(':id')
   @Roles('admin')
   @UseGuards(JwtAuthGuard, RoleGuard)
-  delete(@Param('id') id: number): Promise<any> {
+  delete(@Param('id') id: number) {
     return this.categoryService.delete(id);
   }
 }

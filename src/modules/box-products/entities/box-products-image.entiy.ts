@@ -15,8 +15,7 @@ export class BoxProductsImage {
   @Column({ nullable: false, type: 'text' })
   url: string;
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  @ManyToOne((_type) => BoxProducts, (boxProducts) => boxProducts.images, {
+  @ManyToOne(() => BoxProducts, (boxProducts) => boxProducts.images, {
     onDelete: 'CASCADE',
   })
   @JoinColumn({ name: 'id_box_products' })

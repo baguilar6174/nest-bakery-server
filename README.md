@@ -6,21 +6,6 @@ TODO:
 
 Create database db_bakery
 
-Crear los roles con los que el sistema va a trabajar:
-
-User roles:
-
-| Rol      | id  |
-| -------- | :-: |
-| admin    |  1  |
-| user     |  2  |
-| delivery |  3  |
-
-```sql
--- create roles
-insert into tb_rol (id, name) values (1, 'admin'), (2, 'user'), (3, 'delivery');
-```
-
 Order states:
 
 | State     | id  |
@@ -48,31 +33,6 @@ insert into tb_payment_method (id, name) values (1, 'cash'), (2, 'transfer'), (3
 
 Debe registrar un administrador
 
-# Credentials
-
-**test environment**
-
-```
-user
-    b@gmail.com
-    123456
-
-admin
-    bryan@gmail.com
-    bryan123
-```
-
-**prod environment**
-
-```
-user
-
-
-admin
-    admin@test.com
-    admin123
-```
-
 ## Instalación y ejecución
 
 Ejecución de la base de datos en docker
@@ -88,14 +48,10 @@ yarn
 yarn run start:dev
 ```
 
-## Despliegue en Heroku
-
-1. Cambiar las variables de entorno
-2. Activar la configuración de ssl en database.provider.ts
-
 ## TODO
 
 - Review desable eslint comments
+- Define interfaces to control domain
 
 ## Autor
 

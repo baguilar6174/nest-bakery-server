@@ -1,13 +1,16 @@
 import {
   ArrayNotEmpty,
   IsEmail,
+  IsEnum,
   IsNotEmpty,
   IsOptional,
   IsString,
   MaxLength,
   MinLength,
 } from 'class-validator';
+
 import { Address } from 'src/modules/address/address.entity';
+import { Role } from '../../../common/enum/roles.enum';
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -33,4 +36,9 @@ export class CreateUserDto {
   @IsOptional()
   @ArrayNotEmpty({ message: `At least one address` })
   readonly addresses: Address[];
+
+  @IsEnum(Role, {
+    message: `Invalid role. Options are ${Object.values(Role).join(', ')}`,
+  })
+  readonly role: Role = Role.USER;
 }

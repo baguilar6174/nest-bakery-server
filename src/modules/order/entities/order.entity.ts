@@ -30,34 +30,28 @@ export class Order {
   @Column({ name: 'delivery_date', nullable: true, type: 'date' })
   deliveryDate: Date;
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  @ManyToOne((_type) => User, { eager: true })
+  @ManyToOne(() => User, { eager: true })
   @JoinColumn({ name: 'id_user' })
   user: User;
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  @ManyToOne((_type) => OrderState, { nullable: false, eager: true })
+  @ManyToOne(() => OrderState, { nullable: false, eager: true })
   @JoinColumn({ name: 'id_state' })
   state: OrderState;
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  @ManyToOne((_type) => PaymentMethod, { nullable: false, eager: true })
+  @ManyToOne(() => PaymentMethod, { nullable: false, eager: true })
   @JoinColumn({ name: 'id_payment_method' })
   paymentMethod: PaymentMethod;
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  @ManyToOne((_type) => Iva, { nullable: false })
+  @ManyToOne(() => Iva, { nullable: false })
   @JoinColumn({ name: 'id_iva' })
   iva: Iva;
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  @ManyToOne((_type) => Discount, { nullable: false })
+  @ManyToOne(() => Discount, { nullable: false })
   @JoinColumn({ name: 'id_discount' })
   discount: Discount;
 
   // Una caja puede tener una o varias categorías
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  @ManyToMany((_type) => BoxProducts, { cascade: true, eager: true })
+  @ManyToMany(() => BoxProducts, { cascade: true, eager: true })
   @JoinTable({
     name: 'tb_order_has_box_products',
     joinColumn: {

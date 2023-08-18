@@ -24,7 +24,7 @@ export class BoxProductsController {
 
   // 'localhost:3000/box-products'
   @Get()
-  findAll(@Query() pagination: PaginationQueryDto): Promise<any> {
+  findAll(@Query() pagination: PaginationQueryDto) {
     return this.boxService.findAll(pagination);
   }
 
@@ -44,14 +44,14 @@ export class BoxProductsController {
   @Put(':id')
   @Roles('admin')
   @UseGuards(JwtAuthGuard, RoleGuard)
-  update(@Param('id') id: number, @Body() body: CreateBoxDto): Promise<any> {
+  update(@Param('id') id: number, @Body() body: CreateBoxDto) {
     return this.boxService.update(id, body);
   }
 
   @Delete(':id')
   @Roles('admin')
   @UseGuards(JwtAuthGuard, RoleGuard)
-  delete(@Param('id') id: number): Promise<any> {
+  delete(@Param('id') id: number) {
     return this.boxService.delete(id);
   }
 }

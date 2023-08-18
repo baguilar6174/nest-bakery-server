@@ -1,20 +1,11 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 
 import { User } from 'src/modules/user/entities';
+import { BaseEntity } from '../../common/entities/base.entity';
+import { IAddress } from './interfaces/address.interface';
 
 @Entity({ name: 'tb_address' })
-export class Address {
-  @PrimaryGeneratedColumn('increment')
-  id: number;
-
+export class Address extends BaseEntity implements IAddress {
   @Column({ nullable: false, type: 'varchar', length: 150 })
   addreess: string;
 
@@ -32,10 +23,4 @@ export class Address {
   @ManyToOne(() => User, (user) => user.addresses, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'id_user' })
   user: User;
-
-  @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date;
-
-  @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt: Date;
 }

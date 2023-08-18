@@ -2,22 +2,17 @@ import { BoxProducts } from 'src/modules/box-products/entities';
 import { User } from 'src/modules/user/entities';
 import {
   Column,
-  CreateDateColumn,
   Entity,
   JoinColumn,
   JoinTable,
   ManyToMany,
   ManyToOne,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from 'typeorm';
 import { Discount, Iva, OrderState, PaymentMethod } from '.';
+import { BaseEntity } from '../../../common/entities/base.entity';
 
 @Entity({ name: 'tb_order' })
-export class Order {
-  @PrimaryGeneratedColumn('increment')
-  id: number;
-
+export class Order extends BaseEntity {
   @Column({ nullable: false, type: 'double precision' })
   subtotal: number;
 
@@ -64,10 +59,4 @@ export class Order {
     },
   })
   boxes: BoxProducts[];
-
-  @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date;
-
-  @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt: Date;
 }

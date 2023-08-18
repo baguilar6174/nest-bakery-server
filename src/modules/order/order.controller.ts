@@ -32,7 +32,7 @@ export class OrderController {
   @Get(':id')
   @Roles('admin')
   @UseGuards(JwtAuthGuard, RoleGuard)
-  findOne(@Param('id') id: number): Promise<Order> {
+  findOne(@Param('id') id: string): Promise<Order> {
     return this.orderService.findOne(id);
   }
 
@@ -47,14 +47,14 @@ export class OrderController {
   @Put(':id')
   @Roles('admin')
   @UseGuards(JwtAuthGuard, RoleGuard)
-  update(@Param('id') id: number) {
+  update(@Param('id') id: string) {
     return this.orderService.update(id);
   }
 
   @Delete(':id')
   @Roles('admin')
   @UseGuards(JwtAuthGuard, RoleGuard)
-  delete(@Param('id') id: number) {
+  delete(@Param('id') id: string) {
     return this.orderService.delete(id);
   }
 }

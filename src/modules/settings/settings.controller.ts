@@ -24,7 +24,7 @@ export class SettingsController {
   }
 
   @Get(':id') // localhost:3000/users/1
-  findOne(@Param('id') id: number): Promise<Settings> {
+  findOne(@Param('id') id: string): Promise<Settings> {
     return this.settingsService.findOne(id);
   }
 
@@ -36,14 +36,14 @@ export class SettingsController {
 
   @Put(':id')
   update(
-    @Param('id') id: number,
+    @Param('id') id: string,
     @Body() body: SettingsDto,
   ): Promise<Settings> {
     return this.settingsService.update(id, body);
   }
 
   @Delete(':id')
-  delete(@Param('id') id: number): Promise<void> {
+  delete(@Param('id') id: string): Promise<void> {
     return this.settingsService.delete(id);
   }
 }

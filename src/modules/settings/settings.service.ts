@@ -15,7 +15,7 @@ export class SettingsService {
     return await this.settingsRepository.find();
   }
 
-  async findOne(id: number): Promise<Settings> {
+  async findOne(id: string): Promise<Settings> {
     const settings: Settings = await this.settingsRepository.findOne({
       where: { id },
     });
@@ -30,7 +30,7 @@ export class SettingsService {
     return this.settingsRepository.save(settings);
   }
 
-  async update(id: number, { config, idUser }: SettingsDto): Promise<Settings> {
+  async update(id: string, { config, idUser }: SettingsDto): Promise<Settings> {
     const settings: Settings = await this.settingsRepository.save({
       id,
       config,
@@ -42,7 +42,7 @@ export class SettingsService {
     return settings;
   }
 
-  async delete(id: number): Promise<void> {
+  async delete(id: string): Promise<void> {
     const settings: Settings = await this.settingsRepository.findOne({
       where: { id },
     });

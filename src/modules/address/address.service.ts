@@ -24,7 +24,7 @@ export class AddressService {
     return this.addressRepository.save(address);
   }
 
-  async update(id: number, body: CreateAddressDto) {
+  async update(id: string, body: CreateAddressDto) {
     let address: Address = await this.addressRepository.findOne({
       where: { id },
     });
@@ -38,7 +38,7 @@ export class AddressService {
     };
   }
 
-  async delete(id: number) {
+  async delete(id: string) {
     const address: Address = await this.addressRepository.findOne({
       where: { id },
     });

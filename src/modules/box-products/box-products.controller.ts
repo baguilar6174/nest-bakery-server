@@ -29,7 +29,7 @@ export class BoxProductsController {
   }
 
   @Get(':id') // localhost:3000/box-products/1
-  findOne(@Param('id') id: number): Promise<ReadBoxProductDto> {
+  findOne(@Param('id') id: string): Promise<ReadBoxProductDto> {
     return this.boxService.findOne(id);
   }
 
@@ -44,14 +44,14 @@ export class BoxProductsController {
   @Put(':id')
   @Roles('admin')
   @UseGuards(JwtAuthGuard, RoleGuard)
-  update(@Param('id') id: number, @Body() body: CreateBoxDto) {
+  update(@Param('id') id: string, @Body() body: CreateBoxDto) {
     return this.boxService.update(id, body);
   }
 
   @Delete(':id')
   @Roles('admin')
   @UseGuards(JwtAuthGuard, RoleGuard)
-  delete(@Param('id') id: number) {
+  delete(@Param('id') id: string) {
     return this.boxService.delete(id);
   }
 }

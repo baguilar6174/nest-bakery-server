@@ -1,10 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity } from 'typeorm';
+import { BaseEntity } from '../../common/entities/base.entity';
 
 @Entity({ name: 'tb_settings' })
-export class Settings {
-  @PrimaryGeneratedColumn('increment')
-  id: number;
-
+export class Settings extends BaseEntity {
   @Column({ nullable: false, type: 'text' })
   config: string;
 

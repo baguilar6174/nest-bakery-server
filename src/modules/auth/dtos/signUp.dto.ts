@@ -39,5 +39,5 @@ export class CreateUserDto {
   @IsEnum(Role, {
     message: `Invalid role. Options are ${Object.values(Role).join(', ')}`,
   })
-  readonly role: Role = Role.USER;
+  readonly role: Role;
 }

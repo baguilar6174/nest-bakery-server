@@ -24,7 +24,7 @@ export class CategoryService {
     return categories;
   }
 
-  async findOne(id: number): Promise<Category> {
+  async findOne(id: string): Promise<Category> {
     const category: Category = await this.categoryRepository.findOne({
       where: { id },
     });
@@ -49,7 +49,7 @@ export class CategoryService {
     });
   }
 
-  async update(id: number, { name, description }: Partial<CreateCategoryDto>) {
+  async update(id: string, { name, description }: Partial<CreateCategoryDto>) {
     let category: Category = await this.categoryRepository.findOne({
       where: { id },
     });
@@ -67,7 +67,7 @@ export class CategoryService {
     };
   }
 
-  async delete(id: number) {
+  async delete(id: string) {
     const category: Category = await this.categoryRepository.findOne({
       where: { id },
     });

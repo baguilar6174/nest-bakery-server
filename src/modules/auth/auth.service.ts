@@ -25,7 +25,6 @@ export class AuthService {
   }
 
   async signIn(user: User) {
-    // TODO: complete
     const payload = {
       id: user.id,
       email: user.email,

@@ -1,17 +1,9 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { BoxProducts } from '.';
+import { BaseEntity } from '../../../common/entities/base.entity';
 
 @Entity({ name: 'tb_box_products_image' })
-export class BoxProductsImage {
-  @PrimaryGeneratedColumn('increment')
-  id: number;
-
+export class BoxProductsImage extends BaseEntity {
   @Column({ nullable: false, type: 'text' })
   url: string;
 

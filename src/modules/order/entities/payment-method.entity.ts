@@ -1,10 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity } from 'typeorm';
+import { BaseEntity } from '../../../common/entities/base.entity';
 
 @Entity({ name: 'tb_payment_method' })
-export class PaymentMethod {
-  @PrimaryGeneratedColumn('increment')
-  id: number;
-
+export class PaymentMethod extends BaseEntity {
   @Column({ nullable: false, type: 'varchar', length: 20 })
   name: string;
 }

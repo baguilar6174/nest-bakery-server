@@ -1,21 +1,10 @@
 import { Category } from 'src/modules/category/category.entity';
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, OneToMany } from 'typeorm';
 import { BoxProductsImage } from '.';
+import { BaseEntity } from '../../../common/entities/base.entity';
 
 @Entity({ name: 'tb_box_products' })
-export class BoxProducts {
-  @PrimaryGeneratedColumn('increment')
-  id: number;
-
+export class BoxProducts extends BaseEntity {
   // nullable: false indica que el campo es requerido a nivel de BD
   @Column({ nullable: false, type: 'varchar', length: 100 })
   name: string;
@@ -71,10 +60,4 @@ export class BoxProducts {
     },
   })
   categories: Category[];
-
-  @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date;
-
-  @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt: Date;
 }

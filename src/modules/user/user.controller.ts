@@ -19,7 +19,7 @@ export class UserController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: number): Promise<ReadUserDto> {
+  findOne(@Param('id') id: string): Promise<ReadUserDto> {
     return this.usersService.findOne(id);
   }
 }

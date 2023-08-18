@@ -27,7 +27,7 @@ export class CategoryController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: number): Promise<Category> {
+  findOne(@Param('id') id: string): Promise<Category> {
     return this.categoryService.findOne(id);
   }
 
@@ -42,14 +42,14 @@ export class CategoryController {
   @Put(':id')
   @Roles('admin')
   @UseGuards(JwtAuthGuard, RoleGuard)
-  update(@Param('id') id: number, @Body() body: Partial<CreateCategoryDto>) {
+  update(@Param('id') id: string, @Body() body: Partial<CreateCategoryDto>) {
     return this.categoryService.update(id, body);
   }
 
   @Delete(':id')
   @Roles('admin')
   @UseGuards(JwtAuthGuard, RoleGuard)
-  delete(@Param('id') id: number) {
+  delete(@Param('id') id: string) {
     return this.categoryService.delete(id);
   }
 }

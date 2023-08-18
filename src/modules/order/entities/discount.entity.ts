@@ -1,10 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity } from 'typeorm';
+import { BaseEntity } from '../../../common/entities/base.entity';
 
 @Entity({ name: 'tb_discount' })
-export class Discount {
-  @PrimaryGeneratedColumn('increment')
-  id: number;
-
+export class Discount extends BaseEntity {
   @Column({ nullable: false, type: 'int' })
   percentage: number;
 

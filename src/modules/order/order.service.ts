@@ -26,7 +26,7 @@ export class OrderService {
     return { total, result };
   }
 
-  async findOne(id: number): Promise<Order> {
+  async findOne(id: string): Promise<Order> {
     const order: Order = await this.orderRepository.findOne({ where: { id } });
     if (!order) {
       throw new NotFoundException(`Order with id '${id}' not found`);
@@ -37,13 +37,13 @@ export class OrderService {
   async create(body: CreateOrderDto): Promise<Order> {
     // Set pending state
     const state: OrderState = await this.stateRepository.findOne({
-      where: { id: 1 },
+      where: { id: '1' },
     });
     // Set iva 12
-    const iva: Iva = await this.ivaRepository.findOne({ where: { id: 1 } });
+    const iva: Iva = await this.ivaRepository.findOne({ where: { id: '1' } });
     // Set discount 0
     const discount: Discount = await this.discountRepository.findOne({
-      where: { id: 1 },
+      where: { id: '1' },
     });
     const order: Order = this.orderRepository.create({
       ...body,
@@ -54,14 +54,14 @@ export class OrderService {
     return this.orderRepository.save(order);
   }
 
-  async update(id: number) {
+  async update(id: string) {
     let order: Order = await this.orderRepository.findOne({ where: { id } });
     if (!order) {
       throw new NotFoundException(`Order with id '${id}' not found`);
     }
     // Set delivered state
     const state: OrderState = await this.stateRepository.findOne({
-      where: { id: 2 },
+      where: { id: '2' },
     });
     order = await this.orderRepository.save({ ...order, state, id });
     return {
@@ -70,7 +70,7 @@ export class OrderService {
     };
   }
 
-  async delete(id: number) {
+  async delete(id: string) {
     const order: Order = await this.orderRepository.findOne({ where: { id } });
     if (!order) {
       throw new NotFoundException(`Order with id '${id}' not found`);

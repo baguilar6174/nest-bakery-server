@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 import { plainToInstance } from 'class-transformer';
 import * as bcrypt from 'bcrypt';
 
-import { CreateUserDto } from './dtos/create-user.dto';
+import { CreateUserDto } from '../auth/dtos/signUp.dto';
 import { User } from './entities';
 import { PaginationQueryDto } from './dtos/pagination-query.dto';
 import { ReadUserDto } from './dtos/read-user.dto';

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { plainToInstance } from 'class-transformer';
 
-import { CreateUserDto } from '../user/dtos/create-user.dto';
+import { CreateUserDto } from './dtos/signUp.dto';
 import { ReadUserDto } from '../user/dtos/read-user.dto';
 import { User } from '../user/entities';
 import { UserService } from '../user/user.service';

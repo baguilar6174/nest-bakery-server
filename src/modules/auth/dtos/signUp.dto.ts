@@ -25,7 +25,6 @@ export class CreateUserDto {
 
   @IsNotEmpty()
   @IsEmail()
-  @MaxLength(50)
   readonly email: string;
 
   @IsNotEmpty()

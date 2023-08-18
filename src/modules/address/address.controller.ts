@@ -12,7 +12,7 @@ import {
 } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Roles } from '../user/decorators/rol.decorator';
-import { RoleGuard } from '../user/guards/role.guard';
+import { RoleGuard } from '../auth/guards/role.guard';
 import { Address } from './address.entity';
 import { AddressService } from './address.service';
 import { CreateAddressDto } from './dtos/create-address.dto';

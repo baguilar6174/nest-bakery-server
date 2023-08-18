@@ -1,3 +1,8 @@
+export enum Environment {
+  Production = 'production',
+  Development = 'development',
+}
+
 /**
  * Pending: This is the initial state when the user places an order. The system has received the order, but it has not yet been processed or confirmed.
  * Processing: Once the order is acknowledged and being prepared for shipment, it enters the processing state. This stage involves activities such as verifying payment, checking stock availability, and preparing the items for shipping.
@@ -24,4 +29,16 @@ export enum OrderState {
   RETURNED = 'returned',
   REFUNDED = 'refunded',
   COMPLETED = 'completed',
+}
+
+export enum PaymentMethod {
+  CASH = 'cash',
+  CARD = 'card',
+  TRANSFER = 'transfer',
+}
+
+export enum Role {
+  ADMIN = 'admin',
+  USER = 'user',
+  DELIVERY = 'delivery',
 }

@@ -13,7 +13,7 @@ import {
 } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { Roles } from '../user/decorators/rol.decorator';
-import { RoleGuard } from '../user/guards/role.guard';
+import { RoleGuard } from '../auth/guards/role.guard';
 import { CreateOrderDto } from './dtos';
 import { Order } from './entities';
 import { OrderService } from './order.service';

@@ -5,12 +5,14 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
+  Matches,
   MaxLength,
   MinLength,
 } from 'class-validator';
 
 import { Address } from 'src/modules/address/address.entity';
-import { Role } from '../../../common/enum/roles.enum';
+import { Role } from '../../../common/constants';
+import { PasswordMatch } from '../decorators';
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -30,7 +32,15 @@ export class CreateUserDto {
   @IsNotEmpty()
   @IsString()
   @MinLength(6)
+  @Matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).*$/, {
+    message: 'Password too weak',
+  })
   readonly password: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @PasswordMatch('password')
+  readonly passwordConfirm: string;
 
   @IsOptional()
   @ArrayNotEmpty({ message: `At least one address` })

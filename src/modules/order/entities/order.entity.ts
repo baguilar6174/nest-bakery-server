@@ -10,7 +10,7 @@ import {
 } from 'typeorm';
 
 import { BaseEntity } from '../../../common/entities';
-import { OrderState, PaymentMethod } from '../../../common/enum';
+import { OrderState, PaymentMethod } from '../../../common/constants';
 
 @Entity({ name: 'tb_order' })
 export class Order extends BaseEntity {

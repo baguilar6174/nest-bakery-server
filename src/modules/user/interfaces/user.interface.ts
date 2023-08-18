@@ -1,4 +1,4 @@
-import { Role } from '../../../common/enum/roles.enum';
+import { Role } from '../../../common/constants';
 import { IAddress } from '../../address/interfaces/address.interface';
 
 export interface IUser {

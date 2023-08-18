@@ -7,7 +7,7 @@ import {
 } from 'class-validator';
 import { BoxProducts } from 'src/modules/box-products/entities';
 import { User } from 'src/modules/user/entities';
-import { PaymentMethod } from '../../../common/enum';
+import { PaymentMethod } from '../../../common/constants';
 
 export class CreateOrderDto {
   @IsNotEmpty()

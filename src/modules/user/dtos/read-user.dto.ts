@@ -1,6 +1,6 @@
 import { Exclude, Expose } from 'class-transformer';
 import { Address } from 'src/modules/address/address.entity';
-import { Role } from '../../../common/enum/roles.enum';
+import { Role } from '../../../common/constants';
 
 @Exclude()
 export class ReadUserDto {

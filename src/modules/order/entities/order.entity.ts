@@ -8,8 +8,9 @@ import {
   ManyToMany,
   ManyToOne,
 } from 'typeorm';
-import { Discount, Iva, OrderState, PaymentMethod } from '.';
+
 import { BaseEntity } from '../../../common/entities/base.entity';
+import { OrderState, PaymentMethod } from '../../../common/enum';
 
 @Entity({ name: 'tb_order' })
 export class Order extends BaseEntity {
@@ -29,21 +30,17 @@ export class Order extends BaseEntity {
   @JoinColumn({ name: 'id_user' })
   user: User;
 
-  @ManyToOne(() => OrderState, { nullable: false, eager: true })
-  @JoinColumn({ name: 'id_state' })
+  @Column({ type: 'enum', enum: OrderState, default: OrderState.PENDING })
   state: OrderState;
 
-  @ManyToOne(() => PaymentMethod, { nullable: false, eager: true })
-  @JoinColumn({ name: 'id_payment_method' })
+  @Column({ type: 'enum', enum: PaymentMethod, nullable: false })
   paymentMethod: PaymentMethod;
 
-  @ManyToOne(() => Iva, { nullable: false })
-  @JoinColumn({ name: 'id_iva' })
-  iva: Iva;
+  @Column({ type: 'double precision', default: 12 })
+  iva: number;
 
-  @ManyToOne(() => Discount, { nullable: false })
-  @JoinColumn({ name: 'id_discount' })
-  discount: Discount;
+  @Column({ type: 'double precision', default: 0 })
+  discount: number;
 
   // Una caja puede tener una o varias categorías
   @ManyToMany(() => BoxProducts, { cascade: true, eager: true })

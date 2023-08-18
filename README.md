@@ -2,34 +2,7 @@
 
 ## Importante
 
-TODO:
-
-Create database db_bakery
-
-Order states:
-
-| State     | id  |
-| --------- | :-: |
-| pending   |  1  |
-| delivered |  2  |
-
-```sql
--- create roles
-insert into tb_order_state (id, name) values (1, 'pending'), (2, 'delivered');
-```
-
-Payment methos:
-
-| Method   | id  |
-| -------- | :-: |
-| cash     |  1  |
-| transfer |  2  |
-| card     |  3  |
-
-```sql
--- create roles
-insert into tb_payment_method (id, name) values (1, 'cash'), (2, 'transfer'), (3, 'card');
-```
+TODO: Create database db_bakery
 
 Debe registrar un administrador
 
@@ -41,8 +14,6 @@ Ejecución de la base de datos en docker
 docker compose up -d
 ```
 
-Se puede verificar el correcto funcionamiento en la extensión de docker de vs code
-
 ```bash
 yarn
 yarn run start:dev
@@ -50,7 +21,6 @@ yarn run start:dev
 
 ## TODO
 
-- Review desable eslint comments
 - Define interfaces to control domain
 
 ## Autor

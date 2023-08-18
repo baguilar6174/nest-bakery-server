@@ -1,7 +1,13 @@
-import { ArrayNotEmpty, IsInt, IsNotEmpty, IsNumber } from 'class-validator';
+import {
+  ArrayNotEmpty,
+  IsEnum,
+  IsInt,
+  IsNotEmpty,
+  IsNumber,
+} from 'class-validator';
 import { BoxProducts } from 'src/modules/box-products/entities';
 import { User } from 'src/modules/user/entities';
-import { PaymentMethod } from '../entities';
+import { PaymentMethod } from '../../../common/enum';
 
 export class CreateOrderDto {
   @IsNotEmpty()
@@ -19,7 +25,11 @@ export class CreateOrderDto {
   @IsNotEmpty()
   readonly user: User;
 
-  @IsNotEmpty()
+  @IsEnum(PaymentMethod, {
+    message: `Invalid method. Options are ${Object.values(PaymentMethod).join(
+      ', ',
+    )}`,
+  })
   readonly paymentMethod: PaymentMethod;
 
   @IsNotEmpty()

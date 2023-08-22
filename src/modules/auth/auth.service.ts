@@ -6,6 +6,7 @@ import { CreateUserDto } from './dtos/signUp.dto';
 import { ReadUserDto } from '../user/dtos/read-user.dto';
 import { User } from '../user/entities';
 import { UserService } from '../user/user.service';
+import { IUser } from '../user/interfaces/user.interface';
 
 @Injectable()
 export class AuthService {
@@ -36,7 +37,7 @@ export class AuthService {
   }
 
   async signUp(userDto: CreateUserDto) {
-    const user: User = await this.userService.create(userDto);
+    const user: IUser = await this.userService.create(userDto);
     const payload = {
       id: user.id,
       email: user.email,

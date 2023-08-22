@@ -1,11 +1,12 @@
 import { Exclude, Expose } from 'class-transformer';
 import { Address } from 'src/modules/address/address.entity';
 import { Role } from '../../../common/constants';
+import { IUser } from '../interfaces/user.interface';
 
 @Exclude()
-export class ReadUserDto {
+export class ReadUserDto implements IUser {
   @Expose()
-  readonly id: number;
+  readonly id: string;
 
   @Expose()
   readonly name: string;

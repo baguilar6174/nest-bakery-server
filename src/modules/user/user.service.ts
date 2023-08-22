@@ -8,6 +8,7 @@ import { CreateUserDto } from '../auth/dtos/signUp.dto';
 import { User } from './entities';
 import { ReadUserDto } from './dtos/read-user.dto';
 import { PaginationQueryDto } from '../../common/dtos';
+import { IUser } from './interfaces/user.interface';
 
 @Injectable()
 export class UserService {
@@ -25,19 +26,22 @@ export class UserService {
     return await bcrypt.hash(password, salt);
   }
 
-  async findAll({ limit, offset }: PaginationQueryDto) {
+  async findAll({
+    limit,
+    offset,
+  }: PaginationQueryDto): Promise<{ total: number; data: IUser[] }> {
     const [result, total] = await this.userRepository.findAndCount({
       skip: offset,
       take: limit,
       order: { createdAt: 'DESC' },
     });
-    const data = result.map(
-      (u: User): ReadUserDto => plainToInstance(ReadUserDto, u),
+    const data: IUser[] = result.map(
+      (user: User): IUser => plainToInstance(ReadUserDto, user),
     );
     return { total, data };
   }
 
-  async findOne(id: string): Promise<ReadUserDto> {
+  async findOne(id: string): Promise<IUser> {
     const user: User = await this.userRepository.findOne({ where: { id } });
     if (!user) {
       throw new NotFoundException(`Usuario no encontrado`);
@@ -55,14 +59,14 @@ export class UserService {
     return user;
   }
 
-  async create(body: CreateUserDto): Promise<User> {
+  async create(body: CreateUserDto): Promise<IUser> {
     const hash = await this.hashPassword(body.password);
     const user: User = this.userRepository.create({
       ...body,
       password: hash,
     });
     await this.userRepository.save(user);
-    return user;
+    return plainToInstance(ReadUserDto, user);
 
     // ! Catch error
     /* return this.userRepository.save(user).catch((e) => {
